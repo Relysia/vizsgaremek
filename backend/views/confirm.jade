@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  table(style="width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#444444;")
+    tr
+      td(align="center" style="padding:0;")
+        table(style="border-collapse:collapse;border-spacing:0;text-align:center;width:600px;") 
+          tr 
+            td(align="center" style="padding:0;background:#111111") 
+              h1(style="color:#ffffff;font-size:50px;font-style:italic") FILMSQUAD
+          tr
+            td(align="center" style="padding:0;")
+              img(src="https://images.unsplash.com/photo-1488240339625-c4014e114224?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1079&q=80" alt="Camera" style="width:600px;padding:0;")
+          tr
+            td(align="center" style="padding:0;background:#ffffff;") 
+              h2 Welcome #{name}!
+              p Thank you for joining the Filmsquad community
+          tr 
+            td(align="center" style="padding:0;background:#ffffff;")
+              p Please verify your email address by clicking on this link:
+              a(href="http://localhost:8080/api/confirm?code=#{uniqueString}&email=#{email}" style="font-size:20px;padding:7px 13px;border:none;background:#cc4725;text-decoration:none;color:#ffffff") CONFIRM
+              p(style="padding:5px")
+          tr 
+            td(align="center" style="padding:0;background:#111111;")
+              p(style="font-style:italic;color:#ffffff;padding:5px;") 2021 Filmsquad Community

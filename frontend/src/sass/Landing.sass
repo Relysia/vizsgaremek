@@ -1,0 +1,41 @@
+@import ./ColorPalette.sass
+
+.intro-container
+  color: #fff
+  z-index: 1
+  width: 100%
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  display: flex
+  justify-content: center
+  gap: 30px
+  div
+    text-align: center
+    height: 300px
+    width: 300px
+    background: #080808b4
+    svg
+      margin-top: 20px
+      font-size: 4rem
+    h2
+      margin-top: 5px
+      font-size: 2.4rem
+    p
+      text-align: justify
+      padding: 25px
+      font-size: 1.6rem
+  div:nth-of-type(1)
+    animation: fadeUp 1s ease-in
+  div:nth-of-type(2)
+    animation: fadeUp 2s ease-in
+  div:nth-of-type(3)
+    animation: fadeUp 3s ease-in
+
+@keyframes fadeUp
+  0%
+    opacity: 0
+  50%
+    opacity: 0
+  100%
+    opacity: 1
