@@ -11,8 +11,6 @@ function Alert({ alert, message }) {
     PexelsVideoApi('3037316', setBgVideo);
   }, []);
 
-  // firevideo: 853848
-
   return (
     <div className={alert ? 'alert-container' : 'loading-container'}>
       <div className='alert-top-bar'></div>

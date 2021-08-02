@@ -1,10 +1,10 @@
-const User = require('../models/user');
+const Budget = require('../models/budget');
 const jwt_decode = require('jwt-decode');
 
 exports.getBudget = async (req, res) => {
-  const jwt = req.query.jwt;
+  const { jwt, type } = req.body;
   const { google_id } = jwt_decode(jwt);
-  const user = await User.findOne({ google_id });
+  const budget = await Budget.findOne({ google_id });
 
-  res.send(user.budget);
+  res.send(budget[type]);
 };

@@ -19,6 +19,7 @@ function Navbar({ setUser, setMenuActive }) {
       <Link to='/' onClick={() => setMenuActive(false)}>
         <h1 className='page-title'>Filmsquad</h1>
       </Link>
+
       {user ? (
         <>
           <div className='profile-container'>

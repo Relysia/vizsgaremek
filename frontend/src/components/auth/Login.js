@@ -12,7 +12,7 @@ function Login(props) {
 
   useEffect(() => {
     axios
-      .post('http://localhost:8080/api/login', { code })
+      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/login`, { code })
       .then((res) => {
         localStorage.setItem('jwt', res.data);
         history.push('/');

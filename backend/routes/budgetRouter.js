@@ -6,12 +6,12 @@ const { updateBudget } = require('../controllers/updateBudgetController');
 const { deleteBudget } = require('../controllers/deleteBudgetController');
 
 // GET BUDGET ITEM
-router.get('/', getBudget);
+router.post('/get', getBudget);
 // POST BUDGET ITEM
-router.post('/', postBudget);
+router.post('/post', postBudget);
 // DELETE BUDGET ITEM
-router.put('/', updateBudget);
+router.post('/put', updateBudget);
 // DELETE BUDGET ITEM
-router.delete('/', deleteBudget);
+router.post('/delete', deleteBudget);
 
 module.exports = router;

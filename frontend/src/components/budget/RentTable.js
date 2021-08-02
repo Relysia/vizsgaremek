@@ -4,9 +4,9 @@ import { AiFillSave } from 'react-icons/ai';
 import { BsTrashFill } from 'react-icons/bs';
 
 function CastTable({ data, updateCast, deleteCast }) {
-  const [newRole, setNewRole] = useState(data.cast_role);
-  const [newName, setNewName] = useState(data.cast_name);
-  const [newCost, setNewCost] = useState(data.cast_cost);
+  const [newType, setNewType] = useState(data.rent_type);
+  const [newName, setNewName] = useState(data.rent_name);
+  const [newCost, setNewCost] = useState(data.rent_cost);
   const [edit, setEdit] = useState(false);
   const selectInput = useRef(null);
 
@@ -17,22 +17,21 @@ function CastTable({ data, updateCast, deleteCast }) {
   }, [edit]);
 
   return (
-    <div>
-      <input type='text' onChange={(e) => setNewRole(e.target.value)} value={newRole} ref={selectInput} readOnly={edit ? false : 'readonly'} />
+    <div className='table-style'>
+      <input type='text' onChange={(e) => setNewType(e.target.value)} value={newType} ref={selectInput} readOnly={edit ? false : 'readonly'} />
       <input type='text' onChange={(e) => setNewName(e.target.value)} value={newName} readOnly={edit ? false : 'readonly'} />
-      <input type='text' onChange={(e) => setNewCost(e.target.value)} value={newCost} readOnly={edit ? false : 'readonly'} />
-      <p>HUF</p>
+      <input type='text' onChange={(e) => setNewCost(e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'))} value={newCost} readOnly={edit ? false : 'readonly'} />
       {!edit ? (
         <AiTwotoneEdit onClick={() => setEdit(!edit)} />
       ) : (
         <AiFillSave
           onClick={() => {
-            updateCast(data._id, newRole, newName, newCost);
+            updateCast(data._id, newType, newName, newCost);
             setEdit(!edit);
           }}
         />
       )}
-      <BsTrashFill onClick={() => deleteCast(data._id, data.cast_name)} />
+      <BsTrashFill onClick={() => deleteCast(data._id)} />
     </div>
   );
 }

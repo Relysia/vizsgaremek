@@ -12,7 +12,7 @@ function Register(props) {
 
   useEffect(() => {
     axios
-      .post('http://localhost:8080/api/register', { code })
+      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/register`, { code })
       .then((res) => {
         setMessage(res.data);
       })

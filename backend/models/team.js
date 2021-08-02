@@ -1,30 +1,42 @@
 const mongoose = require('mongoose');
 
-const userDetailsSchema = new mongoose.Schema({
-  google_id: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
-  picture: {
-    type: String,
-  },
-});
-
 const teamSchema = new mongoose.Schema({
+  calendar_id: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
   },
   leader: {
-    type: [userDetailsSchema],
+    google_id: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
+    picture: {
+      type: String,
+    },
   },
   members: [
     {
-      type: [userDetailsSchema],
+      google_id: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      picture: {
+        type: String,
+      },
     },
   ],
+  public: {
+    type: Boolean,
+    default: true,
+  },
   date: {
     type: Date,
     default: Date.now,

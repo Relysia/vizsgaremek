@@ -1,28 +1,64 @@
-const User = require('../models/user');
+const Budget = require('../models/budget');
 const jwt_decode = require('jwt-decode');
 
 exports.updateBudget = async (req, res) => {
-  const { jwt, type, objectId, first, second, third } = req.query;
+  const { jwt, type, objectId, first, second, third } = req.body;
   const { google_id } = jwt_decode(jwt);
 
-  await User.findOne({ google_id })
-    .then((doc) => {
-      item = doc.budget.cast.filter((cast) => cast._id.toString() === objectId.toString());
-      if (first !== '') {
-        item[0].cast_role = first;
+  await Budget.findOne({ google_id })
+    .then(async (budget) => {
+      let budgetItem = budget[type].filter((type) => type._id.toString() === objectId.toString());
+
+      if (type === 'cast') {
+        if (first !== '') {
+          budgetItem[0].cast_role = first;
+        }
+        if (second !== '') {
+          budgetItem[0].cast_name = second;
+        }
+        if (third !== '') {
+          budgetItem[0].cast_cost = third;
+        }
       }
-      if (second !== '') {
-        item[0].cast_name = second;
+
+      if (type === 'rent') {
+        if (first !== '') {
+          budgetItem[0].rent_type = first;
+        }
+        if (second !== '') {
+          budgetItem[0].rent_name = second;
+        }
+        if (third !== '') {
+          budgetItem[0].rent_cost = third;
+        }
       }
-      if (third !== '') {
-        item[0].cast_cost = third;
+
+      if (type === 'travel') {
+        if (first !== '') {
+          budgetItem[0].travel_distance = first;
+        }
+        if (second !== '') {
+          budgetItem[0].travel_car_cons = second;
+        }
+        if (third !== '') {
+          budgetItem[0].travel_litre_cost = third;
+        }
       }
-      doc.save();
-      console.log('Successfully updated cast details!');
+
+      if (type === 'food') {
+        if (first !== '') {
+          budgetItem[0].food_day = first;
+        }
+        if (second !== '') {
+          budgetItem[0].food_cost = second;
+        }
+      }
+
+      await budget.save();
     })
     .catch((err) => {
-      console.log('Oh! Dark');
+      console.log(err);
     });
 
-  res.send('Hello');
+  res.send('Successfully updated cast details!');
 };

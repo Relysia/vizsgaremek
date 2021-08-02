@@ -4,6 +4,7 @@ const { register } = require('../controllers/registerController');
 const { login } = require('../controllers/loginController');
 const { confirm } = require('../controllers/confirmController');
 const { getUser } = require('../controllers/getUserController');
+const { role } = require('../controllers/roleController');
 
 // Authentication
 router.get('/', (req, res) => {
@@ -14,6 +15,9 @@ router.post('/login', login);
 router.get('/confirm', confirm);
 
 // User requests
-router.get('/user', getUser);
+router.post('/user', getUser);
+
+// Role selection
+router.post('/role', role);
 
 module.exports = router;

@@ -4,10 +4,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import Landing from './components/main/Landing';
 import Home from './components/main/Home';
+import RoleSelect from './components/main/RoleSelect';
 import Navbar from './components/main/Navbar';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Budget from './components/private/Budget';
+import Budget from './components/budget/Budget';
+import Crew from './components/team/Crew';
 
 export const UserContext = createContext(null);
 export const MenuContext = createContext(false);
@@ -19,21 +21,21 @@ function App() {
   const googleRegUrl = process.env.REACT_APP_GOOGLE_REG_URL;
   const googleAuthUrl = process.env.REACT_APP_GOOGLE_AUTH_URL;
 
-  useEffect(() => {
-    let token = localStorage.getItem('jwt');
-
-    try {
-      if (jwt_decode(token)) {
-        setUser(jwt_decode(token));
-      }
-
-      if (jwt_decode(token).exp < Date.now() / 1000) {
+  const assignToken = async () => {
+    let jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      let token = await jwt_decode(jwt);
+      if (token.exp < Date.now() / 1000) {
         setUser(null);
         localStorage.removeItem('jwt');
+      } else {
+        setUser(token);
       }
-    } catch (error) {
-      return;
     }
+  };
+
+  useEffect(() => {
+    assignToken();
   }, []);
 
   return (
@@ -44,10 +46,15 @@ function App() {
           <div className='top-bar'></div>
           <div className='bot-bar'></div>
           <Switch>
-            {user ? (
+            {user && !user.firstTime ? (
               <>
                 <Route path='/' exact component={Home}></Route>
                 <Route path='/budget' exact component={Budget}></Route>
+                <Route path='/crew' exact component={Crew}></Route>
+              </>
+            ) : user && user.firstTime ? (
+              <>
+                <Route path='/' exact component={RoleSelect}></Route>
               </>
             ) : (
               <>

@@ -1,31 +1,14 @@
-const User = require('../models/user');
+const Budget = require('../models/budget');
 const jwt_decode = require('jwt-decode');
-const mongoose = require('mongoose');
 
 exports.deleteBudget = async (req, res) => {
-  const { jwt, type, objectId, name } = req.query;
+  const { jwt, type, objectId } = req.body;
   const { google_id } = jwt_decode(jwt);
-  const user = await User.findOne({ google_id });
+  const budget = await Budget.findOne({ google_id });
 
-  // if (!user) {
-  //   res.status(400).send('User not found!');
-  // }
+  budget[type].pull({ _id: objectId });
 
-  // console.log(name);
+  await budget.save();
 
-  if (type === 'cast') {
-    await User.findOne({ google_id })
-      .then((doc) => {
-        doc.budget.cast.filter((cast) => cast._id.toString() !== objectId.toString()).pull({ _id: objectId });
-        doc.save();
-        console.log('Successfully updated cast details!');
-      })
-      .catch((err) => {
-        console.log('Oh! Dark');
-      });
-
-    user.save();
-  }
-
-  res.send('HEllo');
+  res.status(200).send('Successfully deleted cast member!');
 };
