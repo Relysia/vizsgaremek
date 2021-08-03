@@ -13,10 +13,12 @@ import Crew from './components/team/Crew';
 
 export const UserContext = createContext(null);
 export const MenuContext = createContext(false);
+export const AnimationContext = createContext(false);
 
 function App() {
   const [user, setUser] = useState(null);
   const [menuActive, setMenuActive] = useState(false);
+  const [animationActive, setAnimationActive] = useState(false);
 
   const googleRegUrl = process.env.REACT_APP_GOOGLE_REG_URL;
   const googleAuthUrl = process.env.REACT_APP_GOOGLE_AUTH_URL;
@@ -34,48 +36,65 @@ function App() {
     }
   };
 
+  const playAnimation = () => {
+    setAnimationActive(true);
+    setTimeout(() => {
+      setAnimationActive(false);
+    }, 2000);
+  };
+
   useEffect(() => {
     assignToken();
+    playAnimation();
   }, []);
 
   return (
     <Router>
       <UserContext.Provider value={user}>
         <MenuContext.Provider value={menuActive}>
-          <Navbar setUser={setUser} setMenuActive={setMenuActive} />
-          <div className='top-bar'></div>
-          <div className='bot-bar'></div>
-          <Switch>
-            {user && !user.firstTime ? (
+          <AnimationContext.Provider value={menuActive}>
+            <Navbar setUser={setUser} setMenuActive={setMenuActive} playAnimation={playAnimation} />
+            <div className='top-bar'></div>
+            <div className='bot-bar'></div>
+            {animationActive && (
               <>
-                <Route path='/' exact component={Home}></Route>
-                <Route path='/budget' exact component={Budget}></Route>
-                <Route path='/crew' exact component={Crew}></Route>
-              </>
-            ) : user && user.firstTime ? (
-              <>
-                <Route path='/' exact component={RoleSelect}></Route>
-              </>
-            ) : (
-              <>
-                <Route path='/' exact component={Landing}></Route>
-                <Route
-                  path='/googlereg'
-                  component={() => {
-                    window.location.href = googleRegUrl;
-                    return null;
-                  }}></Route>
-                <Route
-                  path='/googleauth'
-                  component={() => {
-                    window.location.href = googleAuthUrl;
-                    return null;
-                  }}></Route>
-                <Route path='/login' component={Login}></Route>
-                <Route path='/register' component={Register}></Route>
+                {/* <div className='top-animation'></div> */}
+                {/* <div className='bot-animation'></div> */}
+                <div className='fade-animation'></div>
               </>
             )}
-          </Switch>
+            <Switch>
+              {user && !user.firstTime ? (
+                <>
+                  <Route path='/' exact component={Home}></Route>
+                  <Route path='/budget' exact component={Budget}></Route>
+                  <Route path='/crew' exact component={Crew}></Route>
+                </>
+              ) : user && user.firstTime ? (
+                <>
+                  <Route path='/' exact component={RoleSelect}></Route>
+                </>
+              ) : (
+                <>
+                  <Route path='/' exact component={Landing}></Route>
+                  <Route
+                    path='/googlereg'
+                    component={() => {
+                      window.location.href = googleRegUrl;
+                      return null;
+                    }}></Route>
+                  <Route
+                    path='/googleauth'
+                    component={() => {
+                      window.location.href = googleAuthUrl;
+                      return null;
+                    }}></Route>
+                  <Route path='/login' component={Login}></Route>
+                  <Route path='/register' component={Register}></Route>
+                </>
+              )}
+            </Switch>
+          </AnimationContext.Provider>
         </MenuContext.Provider>
       </UserContext.Provider>
     </Router>

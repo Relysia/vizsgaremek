@@ -6,21 +6,22 @@ import axios from 'axios';
 import { GiTeamIdea } from 'react-icons/gi';
 import { RiGroup2Fill } from 'react-icons/ri';
 import CreateTeam from './CreateTeam';
+import UserTeam from './UserTeam';
 
 function Crew(props) {
   const menu = useContext(MenuContext);
   const [bgVideo, setBgVideo] = useState(null);
   const [active, setActive] = useState(false);
+
   const [data, setData] = useState(null);
 
   const getUser = () => {
     const jwt = localStorage.getItem('jwt');
 
     axios
-      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/user`, { jwt })
+      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/team/getroles`, { jwt })
       .then((res) => {
         setData(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -39,15 +40,15 @@ function Crew(props) {
             <>
               <h2>Crew</h2>
               <div className='crew-options'>
-                {data && data.roles.team_leader && data.team.calendar_id === '' ? (
+                {data && data.leader && data.calendar_id === '' ? (
                   <div onClick={() => setActive('create')}>
                     <GiTeamIdea />
                     <h3>Create Team</h3>
                   </div>
                 ) : (
                   data &&
-                  data.roles.team_leader &&
-                  data.team.calendar_id !== '' && (
+                  data.leader &&
+                  data.calendar_id !== '' && (
                     <div onClick={() => setActive('team')}>
                       <RiGroup2Fill />
                       <h3>Your Team</h3>
@@ -58,6 +59,7 @@ function Crew(props) {
             </>
           )}
           {active === 'create' && <CreateTeam setActive={setActive} />}
+          {active === 'team' && <UserTeam setActive={setActive} />}
         </div>
       )}
     </div>

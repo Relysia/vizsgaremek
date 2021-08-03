@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from '../../App';
 import { MenuContext } from '../../App';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FaUserTie } from 'react-icons/fa';
 import { GiCash } from 'react-icons/gi';
 import { SiGooglecalendar } from 'react-icons/si';
@@ -9,9 +9,15 @@ import { CgMenuGridR } from 'react-icons/cg';
 import { CgCloseR } from 'react-icons/cg';
 import { FaCameraRetro } from 'react-icons/fa';
 
-function Menu({ setMenuActive }) {
+function Menu({ setMenuActive, playAnimation }) {
   const user = useContext(UserContext);
   const menu = useContext(MenuContext);
+  const history = useHistory();
+
+  function delayAndGo(e, to) {
+    e.preventDefault();
+    setTimeout(() => history.push(to), 1000);
+  }
 
   return (
     <>
@@ -27,13 +33,25 @@ function Menu({ setMenuActive }) {
               <div className='menu-container'>
                 <div className='menu-options'>
                   <div>
-                    <Link to='/crew' onClick={() => setMenuActive(false)}>
+                    <Link
+                      to='/crew'
+                      onClick={(e) => {
+                        delayAndGo(e, '/crew');
+                        setMenuActive(false);
+                        playAnimation();
+                      }}>
                       <FaUserTie />
                       <h3>Crew</h3>
                     </Link>
                   </div>
                   <div>
-                    <Link to='/budget' onClick={() => setMenuActive(false)}>
+                    <Link
+                      to='/budget'
+                      onClick={(e) => {
+                        delayAndGo(e, '/budget');
+                        setMenuActive(false);
+                        playAnimation();
+                      }}>
                       <GiCash />
                       <h3>Budget</h3>
                     </Link>

@@ -19,6 +19,9 @@ const teamSchema = new mongoose.Schema({
     picture: {
       type: String,
     },
+    role: {
+      type: String,
+    },
   },
   members: [
     {
@@ -29,6 +32,9 @@ const teamSchema = new mongoose.Schema({
         type: String,
       },
       picture: {
+        type: String,
+      },
+      role: {
         type: String,
       },
     },

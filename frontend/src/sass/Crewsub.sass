@@ -74,3 +74,49 @@
     opacity: 0
   100%
     opacity: 1
+
+.user-team
+  z-index: 1
+  position: absolute
+  left: 0
+  height: 100vh
+  width: 100vw
+  background: #00000088
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  animation: createTeamFadeIn 1s
+  h2
+    position: absolute
+    top: 0
+    font-size: 3rem
+
+.teamleader-container
+  background: linear-gradient(#7e7e7e, #111111)
+  padding: 20px 25px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  border-radius: 20px
+  box-shadow: 1px 1px 5px #000000b7
+  animation: teamFadeIn 1s
+  img
+    border-radius: 50%
+    border: 2px solid #fff
+    width: 90px
+  h3
+    font-size: 2rem
+    margin-top: 10px
+  p
+    margin-top: 2px
+    font-size: 1.6rem
+    text-transform: uppercase
+    font-weight: 300
+
+@keyframes teamFadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1

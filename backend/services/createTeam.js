@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Team = require('../models/team');
 
-exports.createTeam = async (data, res, google_id, title, public) => {
+exports.createTeam = async (data, res, google_id, title, public, teamRole) => {
   let publicValue;
 
   if (public === true) {
@@ -25,6 +25,7 @@ exports.createTeam = async (data, res, google_id, title, public) => {
           google_id,
           name: user.name,
           picture: user.picture,
+          role: teamRole,
         },
         public: publicValue,
       });
