@@ -24,10 +24,10 @@ function Budget(props) {
     <div>
       <VideoBackground video={bgVideo} />
       {!menu && (
-        <div className={active ? 'budget-container-active' : 'budget-container'}>
+        <div className='budget-container'>
           {!active && (
             <>
-              <h2>Budget</h2>
+              <h2 className='submenu-title'>Budget</h2>
               <div className='budget-options'>
                 <div onClick={() => setActive('cast')}>
                   <HiUserGroup />

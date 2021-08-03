@@ -5,8 +5,10 @@ import VideoBackground from '../utils/VideoBackground';
 import axios from 'axios';
 import { GiTeamIdea } from 'react-icons/gi';
 import { RiGroup2Fill } from 'react-icons/ri';
+import { TiUserAdd } from 'react-icons/ti';
 import CreateTeam from './CreateTeam';
 import UserTeam from './UserTeam';
+import JoinTeam from './JoinTeam';
 
 function Crew(props) {
   const menu = useContext(MenuContext);
@@ -38,16 +40,20 @@ function Crew(props) {
         <div className='crew-container'>
           {!active && (
             <>
-              <h2>Crew</h2>
+              <h2 className='submenu-title'>Crew</h2>
               <div className='crew-options'>
                 {data && data.leader && data.calendar_id === '' ? (
                   <div onClick={() => setActive('create')}>
                     <GiTeamIdea />
                     <h3>Create Team</h3>
                   </div>
+                ) : data && !data.leader && data.calendar_id === '' ? (
+                  <div onClick={() => setActive('join')}>
+                    <TiUserAdd />
+                    <h3>Join Team</h3>
+                  </div>
                 ) : (
                   data &&
-                  data.leader &&
                   data.calendar_id !== '' && (
                     <div onClick={() => setActive('team')}>
                       <RiGroup2Fill />
@@ -60,6 +66,7 @@ function Crew(props) {
           )}
           {active === 'create' && <CreateTeam setActive={setActive} />}
           {active === 'team' && <UserTeam setActive={setActive} />}
+          {active === 'join' && <JoinTeam setActive={setActive} />}
         </div>
       )}
     </div>

@@ -16,8 +16,13 @@ exports.userTeam = async (req, res) => {
   const { name, picture, role } = team.leader;
   const leader = { name, picture, role };
 
-  const members = team.members;
-  // team.leader.google_id = undefined;
+  const members = [];
 
-  res.send({ title, leader, members });
+  team.members.forEach((member) => {
+    members.push({ name: member.name, picture: member.picture, role: member.role });
+  });
+
+  const public = team.public;
+
+  res.send({ title, leader, members, public });
 };

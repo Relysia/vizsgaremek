@@ -76,47 +76,185 @@
     opacity: 1
 
 .user-team
-  z-index: 1
   position: absolute
-  left: 0
-  height: 100vh
+  top: 70px
+  height: calc(100vh - 140px)
   width: 100vw
   background: #00000088
   display: flex
   flex-direction: column
-  justify-content: center
+  justify-content: flex-start
   align-items: center
   animation: createTeamFadeIn 1s
+  padding: 20px 0
+  overflow-Y: auto
   h2
-    position: absolute
-    top: 0
-    font-size: 3rem
+    font-size: 2.4rem
+    margin-bottom: 25px
+    border-bottom: 2px solid #fff
 
 .teamleader-container
-  background: linear-gradient(#7e7e7e, #111111)
-  padding: 20px 25px
   display: flex
   flex-direction: column
   justify-content: center
   align-items: center
-  border-radius: 20px
-  box-shadow: 1px 1px 5px #000000b7
   animation: teamFadeIn 1s
+  h3
+    font-size: 2.2rem
+    text-transform: uppercase
+    margin-bottom: 7px
   img
+    z-index: 4
     border-radius: 50%
     border: 2px solid #fff
-    width: 90px
-  h3
-    font-size: 2rem
-    margin-top: 10px
-  p
-    margin-top: 2px
-    font-size: 1.6rem
-    text-transform: uppercase
-    font-weight: 300
+    width: 80px
+  div
+    z-index: 3
+    margin-top: -7px
+    background: linear-gradient(#d8421d, #131313)
+    display: flex
+    flex-direction: column
+    align-items: center
+    border-radius: 5px
+    box-shadow: 1px 1px 5px #000000b7
+    padding: 8px 0
+    width: 180px
+    h4
+      font-size: 1.8rem
+      text-shadow: 1px 1px #000
+    p
+      margin-top: 2px
+      font-size: 1.6rem
+      text-transform: uppercase
+      font-weight: 300
+      text-shadow: 1px 1px #000
 
 @keyframes teamFadeIn
   0%
     opacity: 0
   100%
     opacity: 1
+
+.teammember-container
+  margin-top: 35px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  animation: teamFadeIn 1s
+  h3
+    font-size: 2.2rem
+    text-transform: uppercase
+    margin-bottom: 7px
+  .teammember-members
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 30px
+    width: 610px
+    flex-wrap: wrap
+    .teammember
+      display: flex
+      flex-direction: column
+      align-items: center
+      img
+        z-index: 4
+        border-radius: 50%
+        border: 2px solid #fff
+        width: 80px
+      div
+        z-index: 3
+        margin-top: -7px
+        background: linear-gradient(#d8421d, #131313)
+        display: flex
+        flex-direction: column
+        align-items: center
+        border-radius: 5px
+        box-shadow: 1px 1px 5px #000000b7
+        padding: 8px 0
+        width: 180px
+        h4
+          font-size: 1.8rem
+          text-shadow: 1px 1px #000
+        p
+          margin-top: 2px
+          font-size: 1.6rem
+          text-transform: uppercase
+          font-weight: 300
+          text-shadow: 1px 1px #000
+
+@keyframes teamFadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+.join-team
+  z-index: 1
+  position: absolute
+  left: 0
+  height: 100vh
+  width: 100vw
+  background: #00000088
+  animation: createTeamFadeIn 1s
+  display: flex
+  justify-content: center
+  align-items: center
+  gap: 30px
+  h2
+    position: absolute
+    top: 100px
+    font-size: 2.8rem
+  div
+    background: linear-gradient(#d8421d, #131313)
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding: 10px 15px
+    border-radius: 10px
+    box-shadow: 1px 1px 5px #000000b7
+    h3
+      font-size: 1.8rem
+    h3:nth-of-type(1)
+      text-transform: uppercase
+    p
+      font-size: 1.6rem
+      text-transform: uppercase
+    p:nth-of-type(2)
+      margin-top: 10px
+    img
+      border-radius: 50%
+      border: 3px solid #fff
+      width: 90px
+      margin: 10px 0
+    button
+      margin-top: 10px
+      font-size: 2rem
+      background: #d8421d
+      color: #fff
+      font-weight: 600
+      border: 2px solid #fff
+      text-transform: uppercase
+      padding: 3px 15px
+      transition: .4s
+      margin-bottom: 3px
+      &:hover
+        background: #77200a
+        cursor: pointer
+    input
+      text-align: center
+      font-size: 1.6rem
+      margin: 5px
+      padding: 3px 0
+      background: linear-gradient(#d8421d, #7a0808)
+      color: #fff
+      border: 1px solid #ffffff00
+      &::placeholder
+        opacity: .7
+      &:focus
+        outline: none
+        border: 1px solid #fff
+    .team-progress
+      font-size: 1.6rem
+      animation: progOpacity 2s infinite

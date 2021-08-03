@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaUserTie } from 'react-icons/fa';
+import { RiGroupFill } from 'react-icons/ri';
 import { GiCash } from 'react-icons/gi';
 import { SiGooglecalendar } from 'react-icons/si';
 import PexelsVideoApi from '../../api/PexelsApi';
@@ -17,7 +17,7 @@ function Landing(props) {
       <VideoBackground video={bgVideo} />
       <div className='intro-container'>
         <div>
-          <FaUserTie />
+          <RiGroupFill />
           <h2>Unite</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis impedit deleniti autem molestiae culpa a illum officia? Animi id consequatur possimus recusandae, sapiente qui quidem, delectus vero, earum</p>
         </div>
