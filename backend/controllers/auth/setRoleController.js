@@ -1,8 +1,8 @@
-const User = require('../models/user');
+const User = require('../../models/user');
 const jwt = require('jsonwebtoken');
 const jwt_decode = require('jwt-decode');
 
-exports.role = async (req, res) => {
+exports.setRole = async (req, res) => {
   const { token, role } = req.body;
   const { google_id, name, email, picture, firstTime, access_token } = jwt_decode(token);
 

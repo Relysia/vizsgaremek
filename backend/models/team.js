@@ -16,6 +16,9 @@ const teamSchema = new mongoose.Schema({
     name: {
       type: String,
     },
+    email: {
+      type: String,
+    },
     picture: {
       type: String,
     },
@@ -31,11 +34,22 @@ const teamSchema = new mongoose.Schema({
       name: {
         type: String,
       },
+      email: {
+        type: String,
+      },
       picture: {
         type: String,
       },
       role: {
         type: String,
+      },
+      calendar_share: {
+        type: Boolean,
+        default: false,
+      },
+      calendar_join: {
+        type: Boolean,
+        default: false,
       },
     },
   ],

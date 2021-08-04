@@ -18,7 +18,6 @@ function Register(props) {
       })
       .catch((err) => {
         setMessage(err.response.data);
-        console.log(err.response.data);
       });
   }, [code, history]);
 

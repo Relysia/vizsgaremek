@@ -18,7 +18,7 @@ block content
           tr 
             td(align="center" style="padding:0;background:#ffffff;")
               p Please verify your email address by clicking on this link:
-              a(href="http://localhost:8080/api/confirm?code=#{uniqueString}&email=#{email}" style="font-size:20px;padding:7px 13px;border:none;background:#cc4725;text-decoration:none;color:#ffffff") CONFIRM
+              a(href="#{frontendUrl}/confirm?code=#{uniqueString}&email=#{email}" style="font-size:20px;padding:7px 13px;border:none;background:#cc4725;text-decoration:none;color:#ffffff") CONFIRM
               p(style="padding:5px")
           tr 
             td(align="center" style="padding:0;background:#111111;")

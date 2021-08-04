@@ -1,4 +1,4 @@
-const Budget = require('../models/budget');
+const Budget = require('../../models/budget');
 const jwt_decode = require('jwt-decode');
 
 exports.deleteBudget = async (req, res) => {

@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const Team = require('../models/team');
+const User = require('../../models/user');
+const Team = require('../../models/team');
 const jwt_decode = require('jwt-decode');
 
 exports.userTeam = async (req, res) => {

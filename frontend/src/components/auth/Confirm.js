@@ -3,27 +3,26 @@ import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Alert from '../alert/Alert';
 
-function Login(props) {
+function Confirm(props) {
   const search = useLocation().search;
   const code = new URLSearchParams(search).get('code');
+  const email = new URLSearchParams(search).get('email');
   let history = useHistory();
 
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
     axios
-      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/login`, { code })
+      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/confirm`, { code, email })
       .then((res) => {
-        localStorage.setItem('jwt', res.data);
-        history.push('/');
-        history.go(0);
+        setMessage(res.data);
       })
       .catch((err) => {
         setMessage(err.response.data);
       });
-  }, [code, history]);
+  }, [code, email, history]);
 
   return <div>{message ? <Alert alert={true} message={message} /> : <Alert alert={false} message={null} />}</div>;
 }
 
-export default Login;
+export default Confirm;

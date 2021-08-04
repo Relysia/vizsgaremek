@@ -1,6 +1,6 @@
 const axios = require('axios');
 const jwt_decode = require('jwt-decode');
-const { createTeam } = require('../services/createTeam');
+const { createTeam } = require('../../services/createTeam');
 
 exports.createCalendar = async (req, res) => {
   const { jwt, title, publicValue, teamRole } = req.body;

@@ -62,7 +62,12 @@ function Navbar({ setUser, setMenuActive, playAnimation }) {
               }}>
               <AiOutlineUserAdd />
             </Link>
-            <Link to='/googleauth' onClick={() => playAnimation()}>
+            <Link
+              to='/googleauth'
+              onClick={(e) => {
+                delayAndGo(e, '/googleauth');
+                playAnimation();
+              }}>
               <AiFillUnlock />
             </Link>
           </div>

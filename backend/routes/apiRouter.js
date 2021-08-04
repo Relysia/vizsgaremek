@@ -1,23 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const { register } = require('../controllers/registerController');
-const { login } = require('../controllers/loginController');
-const { confirm } = require('../controllers/confirmController');
-const { getUser } = require('../controllers/getUserController');
-const { role } = require('../controllers/roleController');
+const { register } = require('../controllers/auth/registerController');
+const { login } = require('../controllers/auth/loginController');
+const { confirm } = require('../controllers/auth/confirmController');
+const { getUser } = require('../controllers/user/getUserController');
+const { getRoles } = require('../controllers/auth/getRolesController');
+const { setRole } = require('../controllers/auth/setRoleController');
+
+router.get('/', (req, res) => {
+  res.send('Api Router is Working!');
+});
 
 // Authentication
-router.get('/', (req, res) => {
-  res.send('Hello');
-});
 router.post('/register', register);
 router.post('/login', login);
-router.get('/confirm', confirm);
+router.post('/confirm', confirm);
 
 // User requests
 router.post('/user', getUser);
 
-// Role selection
-router.post('/role', role);
+// Get User Role
+router.post('/getroles', getRoles);
+
+// Set User Role
+router.post('/role', setRole);
 
 module.exports = router;

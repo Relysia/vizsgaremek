@@ -1,56 +1,167 @@
-.budget-container
-  color: #fff
-  display: flex
-  height: 100vh
-  flex-direction: column
-  align-items: center
-  justify-content: center
-  animation: budgetFadeIn 1.5s
-
-@keyframes budgetFadeIn
+@keyframes castFadeIn
   0%
     opacity: 0
   100%
     opacity: 1
 
-.budget-options
+.budget-submenu
+  z-index: 1
+  background: #00000088
+  position: absolute
+  top: -80px
+  left: 0
+  height: 100vh
+  width: 100vw
   display: flex
-  width: 100%
-  justify-content: space-evenly
+  margin-top: 80px
+  flex-direction: column
   align-items: center
-  div, a
-    color: #fff
-    display: flex
-    flex-direction: column
-    align-items: center
-    transition: .4s
-    color: #fff
-    &:hover
-      color: #eb4917
-      cursor: pointer
-    svg
-      font-size: 10rem
-      filter: drop-shadow( 2px 2px 2px #000000)
-    h3
-      margin-top: 10px
-      font-size: 3rem
-      text-shadow: 2px 2px #000000
-  div:nth-of-type(1)
-    animation: fadeUp .5s ease-in
-  div:nth-of-type(2)
-    animation: fadeUp 1s ease-in
-  div:nth-of-type(3)
-    animation: fadeUp 1.5s ease-in
-  div:nth-of-type(4)
-    animation: fadeUp 2s ease-in
+  color: #fff
+  animation: castFadeIn 1s
+  h2
+    margin-top: 90px
+    font-size: 3rem
+    text-transform: uppercase
+    text-shadow: 2px 2px #000
 
-.back-button
-  position: fixed
-  top: 50%
-  left: 20px
-  transform: translateY(-50%)
-  font-size: 5rem
+.add-button
+  margin-top: 5px
+  font-size: 4rem
   transition: .4s
   &:hover
     color: #eb4917
-    cursor: pointer
+    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+
+.budget-input-container
+  width: 675px
+  margin-top: 7px
+
+.budget-title
+  display: flex
+  justify-content: space-around
+  align-items: center
+  border: 2px solid #fff
+  border-bottom: none
+  background: #111111
+  height: 30px
+  p
+    font-size: 2rem
+
+.budget-input
+  position: relative
+  display: flex
+  justify-content: space-around
+  background: #777777
+  border: 2px solid #fff
+  height: 30px
+  input
+    font-size: 1.8rem
+    background: none
+    border: none
+    text-align: center
+    color: #fff
+    cursor: url("https://i.ibb.co/gSHMGzf/cursortext.png") 10 16, text
+    &:focus
+      outline: none
+      border: 1px solid #fff
+    &::placeholder
+      opacity: .6
+  svg
+    position: absolute
+    right: 10px
+    top: 3px
+    font-size: 1.8rem
+    transition: .4s
+    &:hover
+      color: #eb4917
+      cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+
+.table-title
+  display: flex
+  justify-content: space-around
+  align-items: center
+  border-bottom: 2px solid #fff
+  width: 100%
+  background: #111111
+  height: 35px
+  p
+    font-size: 2rem
+
+.table-container
+  width: 670px
+  border: 2px solid #fff
+  max-height: calc(100vh - 315px)
+  overflow-Y: auto
+  scrollbar-width: thin
+  display: flex
+  flex-direction: column
+  .table-style
+    background: #222222
+    position: relative
+    min-height: 30px
+    max-height: 50px
+    display: flex
+    justify-content: space-around
+    input
+      font-size: 1.8rem
+      text-shadow: 1px 1px #000
+      color: #fff
+      height: 30px
+      background: none
+      border: none
+      text-align: center
+      cursor: url("https://i.ibb.co/gSHMGzf/cursortext.png") 10 16, text
+      &:focus
+        outline: none
+        border: 2px solid #fff
+      &::placeholder
+        color: #ffffff
+        opacity: 1
+        font-size: 2rem
+        text-shadow: 1px 1px #000
+    svg
+      position: absolute
+      font-size: 19px
+      transition: .4s
+      color: #f85959
+      &:hover
+        color: #bd0303
+        cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    svg:nth-of-type(1)
+      top: 5px
+      right: 35px
+    svg:nth-of-type(2)
+      right: 7px
+      top: 5px
+  div:nth-child(2n)
+    background: #585858
+
+.total-cost
+  color: #ffffff
+  background: #111111
+  border-top: 2px solid #fff
+  text-align: center
+  padding: 5px
+  font-size: 2rem
+  text-transform: uppercase
+
+.calculate
+  position: sticky
+  bottom: 0
+  border-top: 2px solid #fff
+  color: #ffffff
+  background: #111111
+  text-align: center
+  padding: 4px
+  p
+    padding: 1px
+    background: #999
+    margin: auto
+    width: 140px
+    font-size: 2rem
+    text-shadow: 1px 1px #000
+    border-radius: 20px
+    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    transition: .4s
+    &:hover
+      background: #727272

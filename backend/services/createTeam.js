@@ -25,6 +25,7 @@ exports.createTeam = async (data, res, google_id, title, public, teamRole) => {
           google_id,
           name: user.name,
           picture: user.picture,
+          email: user.email,
           role: teamRole,
         },
         public: publicValue,

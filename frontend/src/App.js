@@ -6,10 +6,12 @@ import Landing from './components/main/Landing';
 import Home from './components/main/Home';
 import RoleSelect from './components/main/RoleSelect';
 import Navbar from './components/main/Navbar';
+import Confirm from './components/auth/Confirm';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Budget from './components/budget/Budget';
 import Crew from './components/team/Crew';
+import Events from './components/calendar/Events';
 
 export const UserContext = createContext(null);
 export const MenuContext = createContext(false);
@@ -58,8 +60,6 @@ function App() {
             <div className='bot-bar'></div>
             {animationActive && (
               <>
-                {/* <div className='top-animation'></div> */}
-                {/* <div className='bot-animation'></div> */}
                 <div className='fade-animation'></div>
               </>
             )}
@@ -69,6 +69,7 @@ function App() {
                   <Route path='/' exact component={Home}></Route>
                   <Route path='/budget' exact component={Budget}></Route>
                   <Route path='/crew' exact component={Crew}></Route>
+                  <Route path='/events' exact component={Events}></Route>
                 </>
               ) : user && user.firstTime ? (
                 <>
@@ -91,6 +92,7 @@ function App() {
                     }}></Route>
                   <Route path='/login' component={Login}></Route>
                   <Route path='/register' component={Register}></Route>
+                  <Route path='/confirm' component={Confirm}></Route>
                 </>
               )}
             </Switch>

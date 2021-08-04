@@ -57,8 +57,16 @@ function Menu({ setMenuActive, playAnimation }) {
                     </Link>
                   </div>
                   <div>
-                    <SiGooglecalendar />
-                    <h3>Events</h3>
+                    <Link
+                      to='/events'
+                      onClick={(e) => {
+                        delayAndGo(e, '/events');
+                        setMenuActive(false);
+                        playAnimation();
+                      }}>
+                      <SiGooglecalendar />
+                      <h3>Events</h3>
+                    </Link>
                   </div>
                   <div>
                     <FaCameraRetro />

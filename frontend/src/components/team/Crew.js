@@ -21,7 +21,7 @@ function Crew(props) {
     const jwt = localStorage.getItem('jwt');
 
     axios
-      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/team/getroles`, { jwt })
+      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/getroles`, { jwt })
       .then((res) => {
         setData(res.data);
       })
@@ -37,11 +37,11 @@ function Crew(props) {
     <div>
       <VideoBackground video={bgVideo} />
       {!menu && (
-        <div className='crew-container'>
+        <div className='submenu-container'>
           {!active && (
             <>
               <h2 className='submenu-title'>Crew</h2>
-              <div className='crew-options'>
+              <div className='submenu-options'>
                 {data && data.leader && data.calendar_id === '' ? (
                   <div onClick={() => setActive('create')}>
                     <GiTeamIdea />

@@ -1,0 +1,56 @@
+.submenu-container
+  color: #fff
+  display: flex
+  height: 100vh
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  animation: budgetFadeIn 1.5s
+
+@keyframes budgetFadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+.submenu-options
+  display: flex
+  width: 100%
+  justify-content: space-evenly
+  align-items: center
+  div, a
+    color: #fff
+    display: flex
+    flex-direction: column
+    align-items: center
+    transition: .4s
+    color: #fff
+    &:hover
+      color: #eb4917
+      cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    svg
+      font-size: 10rem
+      filter: drop-shadow( 2px 2px 2px #000000)
+    h3
+      margin-top: 10px
+      font-size: 3rem
+      text-shadow: 2px 2px #000000
+  div:nth-of-type(1)
+    animation: fadeUp .5s ease-in
+  div:nth-of-type(2)
+    animation: fadeUp 1s ease-in
+  div:nth-of-type(3)
+    animation: fadeUp 1.5s ease-in
+  div:nth-of-type(4)
+    animation: fadeUp 2s ease-in
+
+.back-button
+  position: fixed
+  top: 50%
+  left: 20px
+  transform: translateY(-50%)
+  font-size: 5rem
+  transition: .4s
+  &:hover
+    color: #eb4917
+    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
