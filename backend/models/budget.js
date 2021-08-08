@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const budgetSchema = new mongoose.Schema({
+  calendar_id: {
+    type: String,
+    required: true,
+  },
   google_id: {
     type: String,
     required: true,
@@ -65,6 +69,10 @@ const budgetSchema = new mongoose.Schema({
       },
     },
   ],
+  public: {
+    type: Boolean,
+    default: true,
+  },
   date: {
     type: Date,
     default: Date.now,

@@ -12,8 +12,8 @@
   padding: 20px 0
   overflow-Y: auto
   h2
-    font-size: 2.4rem
-    margin-bottom: 25px
+    font-size: 2rem
+    margin-bottom: 10px
 
 @keyframes createTeamFadeIn
   0%
@@ -22,3 +22,193 @@
     opacity: 1
 
 .newevent-input-container
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 300px
+  input
+    height: 30px
+    width: 100%
+    background: none
+    border: none
+    text-align: center
+    color: #fff
+    font-size: 1.6rem
+    border-bottom: 2px solid #fff
+    transition: .3s
+    margin-bottom: 7px
+    box-sizing: content-box
+    border: 3px solid
+    border-radius: 20px
+    border-image: linear-gradient(to right bottom, #eb4917, #a71e0c)
+    border-image-slice: 1
+    cursor: url("https://i.ibb.co/gSHMGzf/cursortext.png") 10 16, text
+    &::placeholder
+      opacity: .7
+    &:focus
+      outline: none
+      border-image: linear-gradient(to right bottom, #810c0c, #eb5c31)
+      border-image-slice: 1
+  .date-input
+    display: flex
+    width: 100%
+  h3
+    text-align: center
+    font-size: 1.5rem
+    margin-bottom: 3px
+  p
+    text-align: center
+    margin-top: 7px
+    font-size: 1.6rem
+    animation: eventMessageFadeUp 1s
+  button
+    width: 100%
+    margin-top: 7px
+    font-size: 2rem
+    border: 2px solid #ffffff00
+    background: linear-gradient(to right bottom, #eb4917, #a71e0c)
+    color: #ffffff
+    padding: 5px 15px
+    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    transition: .4s
+    animation: eventMessageFadeUp 1s
+    &:hover
+      padding: 5px 35px
+      border: 2px solid #fff
+  select
+    color: #ffffff
+    margin-bottom: 7px
+    border: none
+    height: 25px
+    width: 100%
+    text-align: center
+    font-size: 1.5rem
+    text-shadow: 1px 1px 2px #000
+    text-transform: uppercase
+    font-weight: 600
+    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+  option
+    font-size: 1.5rem
+  option:nth-of-type(1)
+    background: #a4bdfc
+  option:nth-of-type(2)
+    background: #7ae7bf
+  option:nth-of-type(3)
+    background: #dbadff
+  option:nth-of-type(4)
+    background: #ff887c
+  option:nth-of-type(5)
+    background: #fbd75b
+  option:nth-of-type(6)
+    background: #ffb878
+  option:nth-of-type(7)
+    background: #46d6db
+  option:nth-of-type(8)
+    background: #e1e1e1
+  option:nth-of-type(9)
+    background: #5484ed
+  option:nth-of-type(10)
+    background: #51b749
+  option:nth-of-type(11)
+    background: #dc2127
+
+@keyframes eventMessageFadeUp
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+.upcomming-event
+  position: absolute
+  top: 70px
+  height: calc(100vh - 140px)
+  width: 100vw
+  background: #00000088
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  gap: 20px
+  align-items: center
+  animation: createTeamFadeIn 1s
+  padding: 20px 0
+  overflow-Y: auto
+  h2
+    font-size: 2.5rem
+  h3
+    font-size: 2rem
+  .upcomming-noshare
+    font-size: 1.6rem
+    text-align: center
+    font-weight: 600
+
+.google-calendar
+  display: flex
+  gap: 5px
+  align-items: center
+  cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+  transition: .4s
+  &:hover
+    color: #eb4917
+  a
+    color: #fff
+    margin-top: -5px
+    font-size: 1.7rem
+    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    transition: .4s
+    &:hover
+      color: #eb4917
+  svg
+    font-size: 1.6rem
+    margin-top: -4px
+
+.event-container
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 10px
+  width: 260px
+  padding: 8px 0
+  border-radius: 10px
+  background-color: #000000
+  h3
+    font-size: 2rem
+  a
+    font-size: 1.4rem
+    color: #fff
+    text-transform: uppercase
+    margin-bottom: 3px
+    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    transition: .4s
+    &:hover
+      color: #fff9a7
+
+@for $i from 1 through 14
+  .event-container:nth-of-type(#{$i})
+    background-color: darken(#f5503a, $i * 7%)
+
+.event-time
+  display: flex
+  flex-direction: column
+  align-items: center
+  border: 2px solid #fff
+  padding: 2px 5px
+  .event-start
+    display: flex
+    gap: 10px
+    align-items: center
+    p:nth-of-type(1)
+      font-size: 3rem
+      font-weight: 600
+    p:nth-of-type(2)
+      font-size: 1.6rem
+  .event-duration
+    display: flex
+    gap: 5px
+    align-items: center
+    margin-bottom: 5px
+    p:nth-of-type(1)
+      text-transform: uppercase
+      font-size: 1.6rem
+      font-weight: 600
+    p:nth-of-type(2)
+      font-size: 1.6rem

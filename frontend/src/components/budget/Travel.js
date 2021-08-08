@@ -8,7 +8,7 @@ import AddBudget from '../../api/AddBudget';
 import UpdateBudget from '../../api/UpdateBudget';
 import DeleteBudget from '../../api/DeleteBudget';
 
-function Travel({ setActive }) {
+function Travel({ setActive, leader }) {
   const [budgetInput, setBudgetInput] = useState(false);
   const [data, setData] = useState(null);
   const [distance, setDistance] = useState('');
@@ -83,7 +83,7 @@ function Travel({ setActive }) {
             <p>1 Litre Cost (Ft)</p>
           </div>
           {data.map((data) => (
-            <TravelTable key={data._id} data={data} updateCast={updateCast} deleteCast={deleteCast} setCalculate={setCalculate} />
+            <TravelTable leader={leader} key={data._id} data={data} updateCast={updateCast} deleteCast={deleteCast} setCalculate={setCalculate} />
           ))}
           {calculate ? (
             <p className='total-cost'>Total: {formatTotal}</p>
@@ -100,16 +100,18 @@ function Travel({ setActive }) {
           )}
         </div>
       )}
-      <AiFillPlusSquare
-        className='add-button'
-        onClick={() => {
-          setBudgetInput(!budgetInput);
-          setDistance('');
-          setCons('');
-          setCost('');
-        }}
-      />
-      {budgetInput && (
+      {leader && (
+        <AiFillPlusSquare
+          className='add-button'
+          onClick={() => {
+            setBudgetInput(!budgetInput);
+            setDistance('');
+            setCons('');
+            setCost('');
+          }}
+        />
+      )}
+      {budgetInput && leader && (
         <div className='budget-input-container'>
           <div className='budget-title'>
             <p>Distance (Km)</p>

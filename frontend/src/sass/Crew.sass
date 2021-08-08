@@ -10,6 +10,16 @@
   flex-direction: column
   justify-content: center
   align-items: center
+  div
+    display: flex
+    justify-content: space-between
+    width: 270px
+    p
+      margin-bottom: 0
+    input[type="checkbox"]
+      height: 15px
+      width: 15px
+      cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
   h2
     position: absolute
     top: 0
@@ -43,10 +53,6 @@
       outline: none
       border-image: linear-gradient(to right bottom, #810c0c, #eb5c31)
       border-image-slice: 1
-  input[type="checkbox"]
-    height: 25px
-    widows: 25px
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
   button
     font-size: 3rem
     border: none
@@ -120,7 +126,7 @@
     border-radius: 5px
     box-shadow: 1px 1px 5px #000000b7
     padding: 8px 0
-    width: 180px
+    width: 190px
     h4
       font-size: 1.8rem
       text-shadow: 1px 1px #000
@@ -155,35 +161,71 @@
     gap: 30px
     width: 610px
     flex-wrap: wrap
-    .teammember
-      display: flex
-      flex-direction: column
-      align-items: center
-      img
-        z-index: 4
-        border-radius: 50%
-        border: 2px solid #fff
-        width: 80px
-      div
-        z-index: 3
-        margin-top: -7px
-        background: linear-gradient(#d8421d, #131313)
-        display: flex
-        flex-direction: column
-        align-items: center
-        border-radius: 5px
-        box-shadow: 1px 1px 5px #000000b7
-        padding: 8px 0
-        width: 180px
-        h4
-          font-size: 1.8rem
-          text-shadow: 1px 1px #000
-        p
-          margin-top: 2px
-          font-size: 1.6rem
-          text-transform: uppercase
-          font-weight: 300
-          text-shadow: 1px 1px #000
+
+.teammember
+  display: flex
+  flex-direction: column
+  align-items: center
+  img
+    z-index: 4
+    border-radius: 50%
+    border: 2px solid #fff
+    width: 80px
+  div
+    z-index: 3
+    margin-top: -7px
+    background: linear-gradient(#d8421d, #131313)
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    border-radius: 5px
+    box-shadow: 1px 1px 5px #000000b7
+    padding: 8px 0
+    width: 190px
+    h4
+      font-size: 1.8rem
+      text-shadow: 1px 1px #000
+      margin-bottom: 2px
+    p
+      font-size: 1.6rem
+      text-transform: uppercase
+      font-weight: 300
+      text-align: center
+      text-shadow: 1px 1px #000
+    p:nth-of-type(2)
+      text-shadow: 1px 1px 2px #000
+      margin-top: 5px
+      text-transform: none
+      font-weight: 500
+      border: none
+      font-size: 1.4rem
+      padding: 2px 5px
+      background: #dea600
+      color: #fff
+      border: 2px solid #ffffff00
+      border-radius: 10px
+    h5
+      text-shadow: 1px 1px 2px #000
+      margin-top: 5px
+      font-weight: 500
+      font-size: 1.4rem
+      text-align: center
+    button
+      text-shadow: 1px 1px 2px #000
+      font-weight: 500
+      margin-top: 5px
+      border: none
+      font-size: 1.4rem
+      padding: 2px 5px
+      background: #eb4917
+      color: #fff
+      border-radius: 10px
+      border: 2px solid #ffffff00
+      transition: .4s
+      &:hover
+        cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+        border: 2px solid #ffffff
 
 @keyframes teamFadeIn
   0%

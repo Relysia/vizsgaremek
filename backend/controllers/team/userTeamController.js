@@ -2,14 +2,22 @@ const User = require('../../models/user');
 const Team = require('../../models/team');
 const jwt_decode = require('jwt-decode');
 
-exports.userTeam = async (req, res) => {
-  const jwt = req.body.jwt;
+const userTeam = async (req, res) => {
+  const jwt = req.headers.authorization;
   const { google_id } = jwt_decode(jwt);
   const user = await User.findOne({ google_id });
+
+  if (!user) {
+    return res.status(404).send('User not found!');
+  }
 
   const calendar_id = user.team.calendar_id;
 
   const team = await Team.findOne({ calendar_id });
+
+  if (!team) {
+    return res.status(404).send('Team not found!');
+  }
 
   const title = team.title;
 
@@ -19,10 +27,12 @@ exports.userTeam = async (req, res) => {
   const members = [];
 
   team.members.forEach((member) => {
-    members.push({ name: member.name, picture: member.picture, role: member.role });
+    members.push({ id: member._id, name: member.name, email: member.email, picture: member.picture, role: member.role, share: member.calendar_share, join: member.calendar_join });
   });
 
   const public = team.public;
 
   res.send({ title, leader, members, public });
 };
+
+module.exports = userTeam;

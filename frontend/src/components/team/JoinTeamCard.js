@@ -24,7 +24,7 @@ function JoinTeamCard({ team, joinTeam }) {
               Join
             </button>
           ) : (
-            <p className='join-progress'>Creating your team</p>
+            <p className='join-progress'>Joining in progress</p>
           )}
         </>
       )}

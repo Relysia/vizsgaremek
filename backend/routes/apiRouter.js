@@ -6,6 +6,7 @@ const { confirm } = require('../controllers/auth/confirmController');
 const { getUser } = require('../controllers/user/getUserController');
 const { getRoles } = require('../controllers/auth/getRolesController');
 const { setRole } = require('../controllers/auth/setRoleController');
+const userAuthHandler = require('../middleware/userAuthHandler');
 
 router.get('/', (req, res) => {
   res.send('Api Router is Working!');
@@ -20,7 +21,7 @@ router.post('/confirm', confirm);
 router.post('/user', getUser);
 
 // Get User Role
-router.post('/getroles', getRoles);
+router.post('/getroles', userAuthHandler, getRoles);
 
 // Set User Role
 router.post('/role', setRole);

@@ -3,7 +3,7 @@ const Team = require('../../models/team');
 const jwt_decode = require('jwt-decode');
 const axios = require('axios');
 
-exports.shareCalendar = async (req, res) => {
+exports.addCalendar = async (req, res) => {
   const jwt = req.headers.authorization;
   const { email } = req.body;
   const { google_id, access_token } = jwt_decode(jwt);
@@ -11,7 +11,7 @@ exports.shareCalendar = async (req, res) => {
 
   const calendar_id = user.team.calendar_id;
 
-  const url = `https://www.googleapis.com/calendar/v3/calendars/${calendar_id}/acl`;
+  const url = `https://www.googleapis.com/calendar/v3/users/me/calendarList`;
 
   const config = {
     headers: {
@@ -20,11 +20,7 @@ exports.shareCalendar = async (req, res) => {
   };
 
   const body = {
-    role: 'reader',
-    scope: {
-      type: 'user',
-      value: email,
-    },
+    id: calendar_id,
   };
 
   axios
@@ -32,15 +28,15 @@ exports.shareCalendar = async (req, res) => {
     .then(async (response) => {
       await Team.findOne({ calendar_id }).then(async (team) => {
         const filterMember = team.members.filter((member) => member.email === email);
-        filterMember[0].calendar_share = true;
+        filterMember[0].calendar_join = true;
 
         await team.save();
       });
 
-      res.send('Successfully shared!');
+      res.send(response.data);
     })
     .catch((err) => {
       console.log(err);
-      res.send('Error sharing calendar!');
+      res.send(err);
     });
 };

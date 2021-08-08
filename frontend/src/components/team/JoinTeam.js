@@ -9,8 +9,16 @@ function JoinTeam({ setActive }) {
   const [data, setData] = useState(null);
 
   const getTeams = () => {
+    const jwt = localStorage.getItem('jwt');
+
+    const options = {
+      headers: {
+        Authorization: jwt,
+      },
+    };
+
     axios
-      .get(`${process.env.REACT_APP_BACKEND_HOST}/api/team/getteam`)
+      .get(`${process.env.REACT_APP_BACKEND_HOST}/api/team/getteam`, options)
       .then((res) => {
         setData(res.data);
       })

@@ -1,7 +1,6 @@
 const jwt_decode = require('jwt-decode');
 const crypto = require('crypto');
 const User = require('../models/user');
-const Budget = require('../models/budget');
 const { sendgrid } = require('./sendgrid');
 
 exports.createUser = async (data, res) => {
@@ -30,12 +29,6 @@ exports.createUser = async (data, res) => {
   });
 
   await newUser.save();
-
-  const newBudget = new Budget({
-    google_id: sub,
-  });
-
-  await newBudget.save();
 
   return res.status(200).send(`Confirmation link has been sent to your email: ${email}`);
 };

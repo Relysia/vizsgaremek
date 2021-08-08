@@ -8,7 +8,7 @@ import AddBudget from '../../api/AddBudget';
 import UpdateBudget from '../../api/UpdateBudget';
 import DeleteBudget from '../../api/DeleteBudget';
 
-function Cast({ setActive }) {
+function Cast({ setActive, leader }) {
   const [budgetInput, setBudgetInput] = useState(false);
   const [data, setData] = useState(null);
   const [role, setRole] = useState('');
@@ -57,21 +57,23 @@ function Cast({ setActive }) {
             <p>Cost (Ft)</p>
           </div>
           {data.map((data) => (
-            <CastTable key={data._id} data={data} updateCast={updateCast} deleteCast={deleteCast} />
+            <CastTable leader={leader} key={data._id} data={data} updateCast={updateCast} deleteCast={deleteCast} />
           ))}
           <p className='total-cost'>Total: {formatTotal}</p>
         </div>
       )}
-      <AiFillPlusSquare
-        className='add-button'
-        onClick={() => {
-          setBudgetInput(!budgetInput);
-          setRole('');
-          setName('');
-          setCost('');
-        }}
-      />
-      {budgetInput && (
+      {leader && (
+        <AiFillPlusSquare
+          className='add-button'
+          onClick={() => {
+            setBudgetInput(!budgetInput);
+            setRole('');
+            setName('');
+            setCost('');
+          }}
+        />
+      )}
+      {budgetInput && leader && (
         <div className='budget-input-container'>
           <div className='budget-title'>
             <p>Role</p>

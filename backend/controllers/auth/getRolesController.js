@@ -2,7 +2,7 @@ const User = require('../../models/user');
 const jwt_decode = require('jwt-decode');
 
 exports.getRoles = async (req, res) => {
-  const jwt = req.body.jwt;
+  const jwt = req.headers.authorization;
   const { google_id } = jwt_decode(jwt);
   const user = await User.findOne({ google_id });
 

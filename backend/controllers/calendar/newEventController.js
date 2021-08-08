@@ -4,7 +4,8 @@ const jwt_decode = require('jwt-decode');
 const axios = require('axios');
 
 exports.newEvent = async (req, res) => {
-  const { jwt, title, location, description, startDate, startTime, endDate, endTime } = req.body;
+  const jwt = req.headers.authorization;
+  const { title, location, description, colorId, startDate, startTime, endDate, endTime } = req.body;
   const { google_id, access_token } = jwt_decode(jwt);
   const user = await User.findOne({ google_id });
 
@@ -31,6 +32,7 @@ exports.newEvent = async (req, res) => {
     location,
     description,
     attendees: members,
+    colorId,
     start: {
       dateTime: `${startDate}T${startTime}:00+02:00`,
       timeZone: 'Europe/Budapest',
@@ -43,12 +45,12 @@ exports.newEvent = async (req, res) => {
 
   axios
     .post(url, body, config)
-    .then((res) => {
-      console.log(res.data);
-      res.send(res.data);
+    .then((response) => {
+      console.log(response.data);
+      res.send('Event has been recorded successfully!');
     })
     .catch((err) => {
+      res.send('There was an error, sending your event!');
       console.log(err);
-      res.send(err);
     });
 };
