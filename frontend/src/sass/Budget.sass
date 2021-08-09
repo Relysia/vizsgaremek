@@ -5,32 +5,38 @@
     opacity: 1
 
 .budget-submenu
-  z-index: 1
-  background: #00000088
   position: absolute
-  top: -80px
-  left: 0
-  height: 100vh
+  top: 70px
+  height: calc(100vh - 140px)
   width: 100vw
+  background: #00000088
   display: flex
-  margin-top: 80px
   flex-direction: column
+  justify-content: flex-start
   align-items: center
-  color: #fff
-  animation: castFadeIn 1s
+  animation: createTeamFadeIn 1s
+  padding: 20px 0
+  overflow-y: auto
+  overflow-x: hidden
   h2
-    margin-top: 90px
     font-size: 3rem
     text-transform: uppercase
     text-shadow: 2px 2px #000
+    margin-bottom: 10px
+  h3
+    font-size: 2rem
+    text-shadow: 2px 2px #000
+    margin-bottom: 5px
 
-.add-button
-  margin-top: 5px
-  font-size: 4rem
-  transition: .4s
-  &:hover
-    color: #eb4917
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+.add-button-link
+  color: #fff
+  .add-button
+    margin-top: 5px
+    font-size: 4rem
+    transition: .4s
+    &:hover
+      color: #eb4917
+      cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
 
 .budget-input-container
   width: 675px
@@ -77,9 +83,13 @@
       cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
 
 .table-title
+  position: sticky
+  top: -20px
+  z-index: 5
   display: flex
   justify-content: space-around
   align-items: center
+  border-top: 2px solid #fff
   border-bottom: 2px solid #fff
   width: 100%
   background: #111111
@@ -90,9 +100,7 @@
 .table-container
   width: 670px
   border: 2px solid #fff
-  max-height: calc(100vh - 315px)
-  overflow-Y: auto
-  scrollbar-width: thin
+  border-top: none
   display: flex
   flex-direction: column
   .table-style
@@ -145,23 +153,14 @@
   font-size: 2rem
   text-transform: uppercase
 
-.calculate
-  position: sticky
-  bottom: 0
-  border-top: 2px solid #fff
-  color: #ffffff
-  background: #111111
-  text-align: center
-  padding: 4px
-  p
-    padding: 1px
-    background: #999
-    margin: auto
-    width: 140px
-    font-size: 2rem
-    text-shadow: 1px 1px #000
-    border-radius: 20px
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+.gasprice-link
+  margin-top: -5px
+  margin-bottom: 15px
+  a
+    color: #fff
+    font-size: 1.8rem
+    padding: 3px 8px
     transition: .4s
     &:hover
-      background: #727272
+      color: #eb4917
+      cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer

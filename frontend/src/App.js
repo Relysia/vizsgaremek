@@ -70,6 +70,12 @@ function App() {
                   <Route path='/budget' exact component={Budget}></Route>
                   <Route path='/crew' exact component={Crew}></Route>
                   <Route path='/events' exact component={Events}></Route>
+                  <Route
+                    path='/gasprice'
+                    component={() => {
+                      window.location.href = 'https://holtankoljak.hu/';
+                      return null;
+                    }}></Route>
                 </>
               ) : user && user.firstTime ? (
                 <>

@@ -20,7 +20,13 @@ exports.upcommingEvent = async (req, res) => {
   axios
     .get(url, config)
     .then((response) => {
-      res.send(response.data);
+      const events = [];
+
+      response.data.items.forEach((event) => {
+        events.push({ summary: event.summary, start: { dateTime: event.start.dateTime }, end: { dateTime: event.end.dateTime }, htmlLink: event.htmlLink });
+      });
+
+      res.send(events);
     })
     .catch((err) => {
       res.send(err);

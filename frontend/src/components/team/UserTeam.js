@@ -86,8 +86,8 @@ function UserTeam({ setActive, role }) {
             <div className='teammember-container'>
               <h3>Members</h3>
               <div className='teammember-members'>
-                {data.members.map((member) => (
-                  <div className='teammember' key={member.id}>
+                {data.members.map((member, i) => (
+                  <div className='teammember' key={i}>
                     <img src={member.picture} alt='Member' />
                     <div>
                       <h4 style={{ color: member.email === user.email ? '#ffba00' : '#ffffff' }}>{member.name}</h4>

@@ -17,10 +17,17 @@ function RoleSelect(props) {
   }, []);
 
   const selectRole = (role) => {
-    const token = localStorage.getItem('jwt');
+    const jwtToken = localStorage.getItem('jwt');
 
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_HOST}/api/role`, { token, role })
+    const url = `${process.env.REACT_APP_BACKEND_HOST}/api/role`;
+
+    const auth = { Authorization: jwtToken };
+
+    const data = {
+      role,
+    };
+
+    axios({ method: 'post', url, data, headers: auth })
       .then((res) => {
         localStorage.setItem('jwt', res.data);
         history.push('/');

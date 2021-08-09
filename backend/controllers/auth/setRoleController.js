@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken');
 const jwt_decode = require('jwt-decode');
 
 exports.setRole = async (req, res) => {
-  const { token, role } = req.body;
-  const { google_id, name, email, picture, firstTime, access_token } = jwt_decode(token);
+  const jwtToken = req.headers.authorization;
+  const { role } = req.body;
+  const { google_id, name, email, picture, access_token } = jwt_decode(jwtToken);
 
   await User.findOne({ google_id })
     .then(async (user) => {

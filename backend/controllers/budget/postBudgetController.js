@@ -2,12 +2,13 @@ const Budget = require('../../models/budget');
 const jwt_decode = require('jwt-decode');
 
 exports.postBudget = async (req, res) => {
-  const { jwt, type, first, second, third } = req.body;
+  const jwt = req.headers.authorization;
+  const { type, first, second, third } = req.body;
   const { google_id } = jwt_decode(jwt);
   const budget = await Budget.findOne({ google_id });
 
   if (!budget) {
-    res.status(400).send('User not found!');
+    res.status(404).send('You need to create a team first!');
   }
 
   if (first === '' || second === '') {

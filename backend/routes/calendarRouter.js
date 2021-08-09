@@ -5,7 +5,6 @@ const { upcommingEvent } = require('../controllers/calendar/upcommingEventContro
 const { shareCalendar } = require('../controllers/calendar/shareCalendarController');
 const { addCalendar } = require('../controllers/calendar/addCalendarController');
 const { calendarRole } = require('../controllers/calendar/calendarRoleController');
-const userAuthHandler = require('../middleware/userAuthHandler');
 
 router.get('/', (req, res) => {
   res.send('Calendar route is working!');

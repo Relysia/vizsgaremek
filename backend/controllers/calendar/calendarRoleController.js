@@ -5,18 +5,13 @@ const axios = require('axios');
 
 exports.calendarRole = async (req, res) => {
   const jwt = req.headers.authorization;
-  const { email } = req.body;
   const { google_id } = jwt_decode(jwt);
   const user = await User.findOne({ google_id });
 
   const calendar_id = user.team.calendar_id;
 
-  if (!user) {
-    res.status(404).send('User not exists!');
-  }
-
   await Team.findOne({ calendar_id }).then(async (team) => {
-    const filterMember = team.members.filter((member) => member.email === email);
+    const filterMember = team.members.filter((member) => member.google_id === google_id);
 
     const role = [];
 

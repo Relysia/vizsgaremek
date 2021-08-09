@@ -7,10 +7,6 @@ const userTeam = async (req, res) => {
   const { google_id } = jwt_decode(jwt);
   const user = await User.findOne({ google_id });
 
-  if (!user) {
-    return res.status(404).send('User not found!');
-  }
-
   const calendar_id = user.team.calendar_id;
 
   const team = await Team.findOne({ calendar_id });
@@ -27,7 +23,7 @@ const userTeam = async (req, res) => {
   const members = [];
 
   team.members.forEach((member) => {
-    members.push({ id: member._id, name: member.name, email: member.email, picture: member.picture, role: member.role, share: member.calendar_share, join: member.calendar_join });
+    members.push({ name: member.name, email: member.email, picture: member.picture, role: member.role, share: member.calendar_share, join: member.calendar_join });
   });
 
   const public = team.public;

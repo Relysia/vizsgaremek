@@ -30,7 +30,6 @@ function TravelTable({ data, updateCast, deleteCast, setCalculate, leader }) {
             onClick={() => {
               updateCast(data._id, newDistance, newCons, newCost);
               setEdit(!edit);
-              setCalculate(false);
             }}
           />
         )
@@ -39,7 +38,6 @@ function TravelTable({ data, updateCast, deleteCast, setCalculate, leader }) {
         <BsTrashFill
           onClick={() => {
             deleteCast(data._id);
-            setCalculate(false);
           }}
         />
       )}

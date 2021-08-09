@@ -4,7 +4,8 @@ const jwt_decode = require('jwt-decode');
 const axios = require('axios');
 
 exports.joinTeam = async (req, res) => {
-  const { jwt, calendar_id, role } = req.body;
+  const jwt = req.headers.authorization;
+  const { calendar_id, role } = req.body;
   const { google_id, access_token } = jwt_decode(jwt);
   const user = await User.findOne({ google_id });
 

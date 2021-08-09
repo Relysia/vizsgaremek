@@ -6,7 +6,7 @@ function JoinTeamCard({ team, joinTeam }) {
 
   return (
     <div>
-      {team.public && (
+      {team.public ? (
         <>
           <h3>{team.title}</h3>
           <img src={team.picture} alt='Team Leader' />
@@ -27,6 +27,8 @@ function JoinTeamCard({ team, joinTeam }) {
             <p className='join-progress'>Joining in progress</p>
           )}
         </>
+      ) : (
+        <p className='noteam-present'>No team available to join</p>
       )}
     </div>
   );

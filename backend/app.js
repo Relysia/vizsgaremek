@@ -12,6 +12,8 @@ const budgetRouter = require('./routes/budgetRouter');
 const teamRouter = require('./routes/teamRouter');
 const calendarRouter = require('./routes/calendarRouter');
 const errorHandler = require('./middleware/errorHandler');
+const userExistsHandler = require('./middleware/userExistsHandler');
+const userAuthHandler = require('./middleware/userAuthHandler');
 
 const app = express();
 
@@ -44,6 +46,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
+app.use(userExistsHandler);
+app.use(userAuthHandler);
 app.use('/api/budget', budgetRouter);
 app.use('/api/team', teamRouter);
 app.use('/api/calendar', calendarRouter);

@@ -1,11 +1,8 @@
-import { useEffect, useState, useContext } from 'react';
-import { UserContext } from '../../App';
+import { useEffect, useState } from 'react';
 import { IoPlaySkipBackCircleSharp } from 'react-icons/io5';
-import { SiGooglecalendar } from 'react-icons/si';
 import axios from 'axios';
 
 function UpcommingEvent({ setActive, leader }) {
-  const user = useContext(UserContext);
   const [data, setData] = useState(null);
   const [role, setRole] = useState(null);
 
@@ -18,7 +15,7 @@ function UpcommingEvent({ setActive, leader }) {
 
     axios({ method: 'get', url, headers: auth })
       .then((res) => {
-        setData(res.data.items);
+        setData(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -30,11 +27,7 @@ function UpcommingEvent({ setActive, leader }) {
 
     const auth = { Authorization: jwt };
 
-    const data = {
-      email: user.email,
-    };
-
-    axios({ method: 'post', url, data, headers: auth })
+    axios({ method: 'post', url, headers: auth })
       .then((res) => {
         setRole(res.data[0]);
       })

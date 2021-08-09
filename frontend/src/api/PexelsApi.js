@@ -1,18 +1,15 @@
 import axios from 'axios';
 
 const PexelsVideoApi = (videoId, setVideo) => {
-  const url = `https://api.pexels.com/videos/videos/${videoId}`;
+  const url = `${process.env.REACT_APP_BACKEND_HOST}/api/pexelsvideo`;
 
-  const headers = {
-    headers: {
-      Authorization: process.env.REACT_APP_PEXEL_API_KEY,
-    },
+  const data = {
+    videoId,
   };
 
-  axios
-    .get(url, headers)
+  axios({ method: 'post', url, data })
     .then((res) => {
-      setVideo(res.data.video_files[3].link);
+      setVideo(res.data);
     })
     .catch((err) => console.log(err));
 };

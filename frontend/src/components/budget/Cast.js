@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { IoPlaySkipBackCircleSharp } from 'react-icons/io5';
 import { AiFillPlusSquare } from 'react-icons/ai';
 import { AiFillPlusCircle } from 'react-icons/ai';
@@ -14,6 +14,7 @@ function Cast({ setActive, leader }) {
   const [role, setRole] = useState('');
   const [name, setName] = useState('');
   const [cost, setCost] = useState('');
+  const selectInput = useRef(null);
 
   // Type of budget
   const budgetType = 'cast';
@@ -26,6 +27,16 @@ function Cast({ setActive, leader }) {
   });
   const total = data && data.map((data) => data.cast_cost).reduce((a, b) => a + b, 0);
   const formatTotal = formatter.format(total);
+
+  // Get input field in focus
+  const jumpToInput = (e) => {
+    e && e.preventDefault();
+    if (!budgetInput) {
+      setTimeout(() => {
+        selectInput.current.focus();
+      }, 100);
+    }
+  };
 
   useEffect(() => {
     GetBudget(setData, budgetType);
@@ -49,7 +60,7 @@ function Cast({ setActive, leader }) {
     <div className='budget-submenu'>
       <IoPlaySkipBackCircleSharp className='back-button' onClick={() => setActive(false)} />
       <h2>Cast</h2>
-      {data && data.length > 0 && (
+      {data && data.length > 0 ? (
         <div className='table-container'>
           <div className='table-title'>
             <p>Role</p>
@@ -61,17 +72,21 @@ function Cast({ setActive, leader }) {
           ))}
           <p className='total-cost'>Total: {formatTotal}</p>
         </div>
+      ) : (
+        <h3>No record for this category yet</h3>
       )}
       {leader && (
-        <AiFillPlusSquare
-          className='add-button'
-          onClick={() => {
-            setBudgetInput(!budgetInput);
-            setRole('');
-            setName('');
-            setCost('');
-          }}
-        />
+        <div onClick={(e) => jumpToInput(e)} className='add-button-link'>
+          <AiFillPlusSquare
+            className='add-button'
+            onClick={() => {
+              setBudgetInput(!budgetInput);
+              setRole('');
+              setName('');
+              setCost('');
+            }}
+          />
+        </div>
       )}
       {budgetInput && leader && (
         <div className='budget-input-container'>
@@ -81,7 +96,7 @@ function Cast({ setActive, leader }) {
             <p>Cost (Ft)</p>
           </div>
           <div className='budget-input'>
-            <input type='text' placeholder='Actor' value={role} onChange={(e) => setRole(e.target.value)} />
+            <input type='text' placeholder='Actor' value={role} onChange={(e) => setRole(e.target.value)} ref={selectInput} />
             <input type='text' placeholder='Tom Hanks' value={name} onChange={(e) => setName(e.target.value)} />
             <input type='text' placeholder='2000000' value={cost} onChange={(e) => setCost(e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'))} />
             <AiFillPlusCircle onClick={addCast} />

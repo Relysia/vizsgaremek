@@ -19,6 +19,7 @@ function Budget(props) {
   const [bgVideo, setBgVideo] = useState(null);
   const [active, setActive] = useState(false);
   const [data, setData] = useState(null);
+  const [budgetRole, setBudgetRole] = useState(null);
 
   const getRoles = () => {
     const jwt = localStorage.getItem('jwt');
@@ -34,9 +35,24 @@ function Budget(props) {
       .catch((err) => setMessage(err.response.data));
   };
 
+  const getBudgetRole = () => {
+    const jwt = localStorage.getItem('jwt');
+
+    const url = `${process.env.REACT_APP_BACKEND_HOST}/api/budget/role`;
+
+    const auth = { Authorization: jwt };
+
+    axios({ method: 'post', url, headers: auth })
+      .then((res) => {
+        setBudgetRole(res.data);
+      })
+      .catch((err) => setMessage(err.response.data));
+  };
+
   useEffect(() => {
     PexelsVideoApi('3752547', setBgVideo);
     getRoles();
+    getBudgetRole();
   }, []);
 
   return (
@@ -46,7 +62,7 @@ function Budget(props) {
           <VideoBackground video={bgVideo} />
           {!menu && (
             <div className='submenu-container'>
-              {data && !active && data.calendar_id !== '' ? (
+              {data && !active && data.calendar_id !== '' && budgetRole ? (
                 <>
                   <h2 className='submenu-title'>Budget</h2>
                   <div className='submenu-options'>
@@ -68,6 +84,8 @@ function Budget(props) {
                     </div>
                   </div>
                 </>
+              ) : !budgetRole ? (
+                <p className='noteam-message'>Your team budget is not public!</p>
               ) : data && data.leader && data.calendar_id === '' ? (
                 <p className='noteam-message'>You need to create a team first</p>
               ) : (

@@ -2,7 +2,8 @@ const Budget = require('../../models/budget');
 const jwt_decode = require('jwt-decode');
 
 exports.updateBudget = async (req, res) => {
-  const { jwt, type, objectId, first, second, third } = req.body;
+  const jwt = req.headers.authorization;
+  const { type, objectId, first, second, third } = req.body;
   const { google_id } = jwt_decode(jwt);
 
   await Budget.findOne({ google_id })
