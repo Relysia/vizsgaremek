@@ -30,8 +30,23 @@ function Events(props) {
       .catch((err) => setMessage(err.response.data));
   };
 
+  const calendarAuth = () => {
+    const jwt = localStorage.getItem('jwt');
+
+    const url = `${process.env.REACT_APP_BACKEND_HOST}/api/calendar/calendarauth`;
+
+    const auth = { Authorization: jwt };
+
+    axios({ method: 'post', url, headers: auth })
+      .then((res) => {
+        return;
+      })
+      .catch((err) => setMessage(err.response.data));
+  };
+
   useEffect(() => {
     PexelsVideoApi('5363068', setBgVideo);
+    calendarAuth();
     getRoles();
   }, []);
 

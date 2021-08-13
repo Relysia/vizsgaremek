@@ -22,8 +22,8 @@ function App() {
   const [menuActive, setMenuActive] = useState(false);
   const [animationActive, setAnimationActive] = useState(false);
 
-  const googleRegUrl = process.env.REACT_APP_GOOGLE_REG_URL;
-  const googleAuthUrl = process.env.REACT_APP_GOOGLE_AUTH_URL;
+  const googleRegUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&prompt=select_account&client_id=564539410202-g7nt7tife84vsvi5ht3aokddd01a1f6n.apps.googleusercontent.com&scope=openid%20profile%20email&redirect_uri=${process.env.REACT_APP_FRONTEND_HOST}/register`;
+  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&prompt=select_account&client_id=564539410202-g7nt7tife84vsvi5ht3aokddd01a1f6n.apps.googleusercontent.com&scope=openid%20profile%20email%20https://www.googleapis.com/auth/calendar&redirect_uri=${process.env.REACT_APP_FRONTEND_HOST}/login`;
 
   const assignToken = async () => {
     let jwt = localStorage.getItem('jwt');

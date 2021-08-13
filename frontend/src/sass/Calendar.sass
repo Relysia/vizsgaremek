@@ -25,7 +25,10 @@
   display: flex
   flex-direction: column
   align-items: center
-  width: 300px
+  width: 320px
+  background: #00000088
+  padding: 20px 30px 30px 30px
+  gap: 5px
   input
     height: 30px
     width: 100%
@@ -35,13 +38,10 @@
     color: #fff
     font-size: 1.6rem
     border-bottom: 2px solid #fff
-    transition: .3s
+    transition: .4s
     margin-bottom: 7px
     box-sizing: content-box
-    border: 3px solid
-    border-radius: 20px
-    border-image: linear-gradient(to right bottom, #eb4917, #a71e0c)
-    border-image-slice: 1
+    border-bottom: 3px solid #fff
     cursor: url("https://i.ibb.co/gSHMGzf/cursortext.png") 10 16, text
     &::placeholder
       opacity: .7
@@ -53,7 +53,7 @@
     display: flex
     width: 100%
   h3
-    text-align: center
+    text-align: left
     font-size: 1.5rem
     margin-bottom: 3px
   p
@@ -89,28 +89,28 @@
     cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
   option
     font-size: 1.5rem
-  option:nth-of-type(1)
-    background: #a4bdfc
-  option:nth-of-type(2)
-    background: #7ae7bf
-  option:nth-of-type(3)
-    background: #dbadff
-  option:nth-of-type(4)
-    background: #ff887c
-  option:nth-of-type(5)
-    background: #fbd75b
-  option:nth-of-type(6)
-    background: #ffb878
-  option:nth-of-type(7)
-    background: #46d6db
-  option:nth-of-type(8)
-    background: #e1e1e1
-  option:nth-of-type(9)
-    background: #5484ed
-  option:nth-of-type(10)
-    background: #51b749
-  option:nth-of-type(11)
-    background: #dc2127
+    &:nth-of-type(1)
+      background: #dc2127
+    &:nth-of-type(2)
+      background: #a4bdfc
+    &:nth-of-type(3)
+      background: #7ae7bf
+    &:nth-of-type(4)
+      background: #dbadff
+    &:nth-of-type(5)
+      background: #ff887c
+    &:nth-of-type(6)
+      background: #fbd75b
+    &:nth-of-type(7)
+      background: #ffb878
+    &:nth-of-type(8)
+      background: #46d6db
+    &:nth-of-type(9)
+      background: #e1e1e1
+    &:nth-of-type(10)
+      background: #5484ed
+    &:nth-of-type(11)
+      background: #51b749
 
 @keyframes eventMessageFadeUp
   0%
@@ -213,3 +213,7 @@
       font-weight: 600
     p:nth-of-type(2)
       font-size: 1.6rem
+
+@media (max-width: 330px)
+  .newevent-input-container
+    width: 300px

@@ -1,6 +1,6 @@
 //Module dependencies.
 const app = require('../app');
-const debug = require('debug')('todo:server');
+const debug = require('debug')('filmsquad:server');
 const http = require('http');
 require('dotenv').config();
 const PORT = process.env.PORT || 8080;

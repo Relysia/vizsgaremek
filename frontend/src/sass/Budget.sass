@@ -52,6 +52,10 @@
   height: 30px
   p
     font-size: 2rem
+    &:nth-of-type(1)
+      margin: 0 25px
+    &:nth-of-type(2)
+      margin: 0 20px
 
 .budget-input
   position: relative
@@ -96,6 +100,10 @@
   height: 35px
   p
     font-size: 2rem
+    &:nth-of-type(1)
+      margin: 0 25px
+    &:nth-of-type(2)
+      margin: 0 20px
 
 .table-container
   width: 670px
@@ -164,3 +172,62 @@
     &:hover
       color: #eb4917
       cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+
+@media (max-width: 700px)
+  .budget-title
+    height: 28px
+    p
+      font-size: 1.6rem
+      white-space: nowrap
+      &:nth-of-type(1)
+        margin: 0 15px
+      &:nth-of-type(2)
+        margin: 0
+      &:nth-of-type(3)
+        margin: 0 5px
+
+  .budget-input-container
+    width: calc(100% - 20px)
+    .budget-input
+      padding: 0 10px
+      height: 28px
+      input
+        font-size: 1.5rem
+        width: 100%
+      svg
+        right: 3.5px
+        top: 4px
+        font-size: 1.9rem
+
+  .table-title
+    height: 28px
+    p
+      font-size: 1.6rem
+      white-space: nowrap
+      &:nth-of-type(1)
+        margin: 0 15px
+      &:nth-of-type(2)
+        margin: 0 0px
+      &:nth-of-type(3)
+        margin: 0 5px
+
+  .table-container
+    width: calc(100% - 20px)
+    .table-style
+      padding: 0 10px
+      min-height: 28px
+      input
+        height: 28px
+        font-size: 1.5rem
+        width: 100%
+      &:hover
+        color: #bd0303
+        cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+      svg:nth-of-type(1)
+        font-size: 1.9rem
+        top: 5.5px
+        left: 7px
+      svg:nth-of-type(2)
+        font-size: 1.7rem
+        right: 5px
+        top: 6.5px

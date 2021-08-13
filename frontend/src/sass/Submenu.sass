@@ -46,9 +46,9 @@
 
 .back-button
   position: fixed
-  top: 50%
+  bottom: 50%
   left: 20px
-  transform: translateY(-50%)
+  transform: translateY(50%)
   font-size: 5rem
   transition: .4s
   &:hover
@@ -69,3 +69,22 @@
     opacity: 0
   100%
     opacity: 1
+
+@media (max-width: 700px)
+  .submenu-options
+    flex-wrap: wrap
+    gap: 50px
+    justify-content: center
+    div
+      width: calc(40% - 50px)
+    div, a
+      svg
+        font-size: 9.5rem
+      h3
+        white-space: nowrap
+        margin-top: 5px
+        font-size: 2.5rem
+  .back-button
+    bottom: 17.5px
+    transform: translateY(0)
+    z-index: 5

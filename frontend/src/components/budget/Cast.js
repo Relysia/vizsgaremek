@@ -98,7 +98,7 @@ function Cast({ setActive, leader }) {
           <div className='budget-input'>
             <input type='text' placeholder='Actor' value={role} onChange={(e) => setRole(e.target.value)} ref={selectInput} />
             <input type='text' placeholder='Tom Hanks' value={name} onChange={(e) => setName(e.target.value)} />
-            <input type='text' placeholder='2000000' value={cost} onChange={(e) => setCost(e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'))} />
+            <input type='text' placeholder='500000' value={cost} onChange={(e) => setCost(e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'))} />
             <AiFillPlusCircle onClick={addCast} />
           </div>
         </div>

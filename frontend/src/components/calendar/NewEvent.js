@@ -12,7 +12,7 @@ function NewEvent({ setActive }) {
   const [startTime, setStartTime] = useState('13:00');
   const [endTime, setEndTime] = useState('14:00');
   const [data, setData] = useState(null);
-  const [colorSelect, setColorSelect] = useState('a4bdfc');
+  const [colorSelect, setColorSelect] = useState('dc2127');
   const [colorId, setColorId] = useState('1');
 
   const postEvent = (title, location, description, startDate, startTime, endDate, endTime) => {
@@ -73,12 +73,15 @@ function NewEvent({ setActive }) {
         <input type='text' value={location} onChange={(e) => setLocation(e.target.value)} placeholder='Budapest, Arany János street 1.' required />
         <h3>Description</h3>
         <input type='text' value={description} onChange={(e) => setDescription(e.target.value)} placeholder='First meeting with the crew' required />
-        <h3>Event Color</h3>
+        <h3>Google Calendar Event Color</h3>
         <select
           style={{ background: `#${colorSelect}` }}
           onChange={(e) => {
             setColorSelect(e.target.value);
           }}>
+          <option value='dc2127' id='11' onClick={(e) => setColorId(e.target.id)}>
+            Tomato
+          </option>
           <option value='a4bdfc' id='1' onClick={(e) => setColorId(e.target.id)}>
             Levander
           </option>
@@ -108,9 +111,6 @@ function NewEvent({ setActive }) {
           </option>
           <option value='51b749' id='10' onClick={(e) => setColorId(e.target.id)}>
             Basil
-          </option>
-          <option value='dc2127' id='11' onClick={(e) => setColorId(e.target.id)}>
-            Tomato
           </option>
         </select>
         <h3>Start Date</h3>
