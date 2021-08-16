@@ -1,6 +1,22 @@
 .summary-options
+  position: fixed
+  top: 70px
+  height: calc(100% - 140px)
+  width: 100%
+  animation: createTeamFadeIn 1s
+  padding: 20px 0
   display: flex
+  justify-content: center
+  align-items: center
+  overflow-y: auto
+  overflow-x: hidden
   gap: 50px
+
+@keyframes summaryCardFadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
 
 .summary-card
   position: relative
@@ -9,7 +25,12 @@
   align-items: center
   width: 300px
   border-radius: 10px
-  background: #222222
+  background: #333333
+  transition: .5s
+  animation: summaryCardFadeIn 2s
+  &:hover
+    transform: scale(1.1)
+    cursor: url("../assets/cursorpointer.png") 10 1, pointer
   .summary-photo
     height: 150px
     overflow: hidden
@@ -21,10 +42,13 @@
     img
       width: 100%
   h2
-    font-size: 3rem
     position: absolute
-    top: 60px
+    top: 55px
+    opacity: 0
+    font-size: 3rem
     text-shadow: 1px 1px 3px #000
+    padding: 5px 0
+    transition: .5s
   .summary-details
     display: flex
     justify-content: center
@@ -36,9 +60,120 @@
     p
       font-size: 1.5rem
       text-transform: uppercase
-  .cast-card
-    background: #0037a6
-  .budget-card
-    background: #b13f1c
-  .calendar-card
-    background: #ce5a67
+
+.summary-card:hover h2
+  opacity: 1
+
+.summary-submenu
+  position: fixed
+  top: 50%
+  transform: translateY(-50%)
+  max-height: calc(100% - 200px)
+  width: 400px
+  border: 2px solid #fff
+  background: #000000ce
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  gap: 5px
+  padding: 20px 0 25px 0
+  border-radius: 10px
+  overflow-y: auto
+  overflow-x: hidden
+  animation: summarySubmenuFadeIn 1s
+  svg
+    position: absolute
+    right: 10px
+    top: 10px
+    font-size: 3rem
+    transition: .4s
+    &:hover
+      color: #eb4917
+      cursor: url("../assets/cursorpointer.png") 10 1, pointer
+  h3
+    font-size: 3rem
+    text-transform: uppercase
+    margin-bottom: 15px
+  h4
+    font-size: 2.2rem
+  .summary-budget-text
+    font-size: 2rem
+  .summary-calendar-title
+    margin-bottom: 8px
+    &:nth-of-type(2)
+      margin-top: 20px
+
+.summary-crew:nth-of-type(1)
+  margin-bottom: 15px
+
+.summary-crew
+  display: flex
+  justify-content: center
+  align-items: center
+  gap: 5px
+  img
+    width: 25px
+    border-radius: 50%
+    border: 2px solid #fff
+  p
+    font-size: 2rem
+
+.summary-budget
+  div
+    width: 300px
+    display: flex
+    justify-content: space-around
+    align-items: center
+    gap: 10px
+    p
+      font-size: 2.1rem
+
+.summary-budget-total
+  margin-top: 20px
+
+.summary-budget-price
+  font-size: 2.2rem
+
+.summary-events
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 5px
+  h4
+    font-size: 1.7rem
+  div
+    display: flex
+    gap: 5px
+    p
+      font-size: 1.6rem
+    time
+      font-size: 1.6rem
+      &::after
+        content: '|'
+        margin: 0 5px 0 10px
+      &:nth-of-type(2)
+        font-weight: 700
+    a
+      color: #fff
+      font-size: 1.6rem
+      transition: .4s
+      &:hover
+        color: #eb4917
+        cursor: url("../assets/cursorpointer.png") 10 1, pointer
+
+@keyframes summarySubmenuFadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@media (max-width: 700px)
+  .summary-options
+    flex-direction: column
+    justify-content: flex-start
+    padding: 70px 0 40px 0
+
+  .summary-submenu
+    width: 300px
+    z-index: 6

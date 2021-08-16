@@ -49,10 +49,10 @@ const summary = async (req, res) => {
     food_total,
   };
 
-  // If budget is not public send an empty array
+  // If budget is not public send an empty string
   if (!budget.public && team.leader.google_id !== google_id) {
-    budgetTotal = [];
-    budgetSingle = [];
+    budgetTotal = '';
+    budgetSingle = '';
   }
 
   // CREATING CALENDAR OBJECT
@@ -76,8 +76,8 @@ const summary = async (req, res) => {
       return res.send({ team: { title, leader, members }, budget: { total: budgetTotal, budget: budgetSingle }, calendar: { events } });
     })
     .catch((err) => {
-      // Send empty calendar array, if calendar is not shared with user
-      const calendar = [];
+      // Send empty calendar string, if calendar is not shared with user
+      const calendar = '';
       return res.send({ team: { title, leader, members }, budget: { total: budgetTotal, budget: budgetSingle }, calendar });
     });
 };

@@ -56,9 +56,8 @@ function App() {
       <UserContext.Provider value={user}>
         <MenuContext.Provider value={menuActive}>
           <AnimationContext.Provider value={menuActive}>
-            <Navbar setUser={setUser} setMenuActive={setMenuActive} playAnimation={playAnimation} />
             <div className='top-bar'></div>
-            <div className='bot-bar'></div>
+            <Navbar setUser={setUser} setMenuActive={setMenuActive} playAnimation={playAnimation} />
             {animationActive && (
               <>
                 <div className='fade-animation'></div>
@@ -110,6 +109,7 @@ function App() {
                 </>
               )}
             </Switch>
+            <div className='bot-bar'></div>
           </AnimationContext.Provider>
         </MenuContext.Provider>
       </UserContext.Provider>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import fallbackImage from '../assets/fallbackImage.jpg';
 
 const PexelsPhotoApi = (photoId, setPhoto, size) => {
   const url = `${process.env.REACT_APP_BACKEND_HOST}/api/pexelsphoto`;
@@ -12,7 +13,7 @@ const PexelsPhotoApi = (photoId, setPhoto, size) => {
       setPhoto(res.data.src[size]);
     })
     .catch((err) => {
-      console.log(err);
+      setPhoto(fallbackImage);
     });
 };
 

@@ -51,7 +51,7 @@ function Events(props) {
   }, []);
 
   return (
-    <div className='no-overflow'>
+    <section>
       {!message ? (
         <>
           <VideoBackground video={bgVideo} />
@@ -94,7 +94,7 @@ function Events(props) {
       ) : (
         <Alert alert={true} message={message} />
       )}
-    </div>
+    </section>
   );
 }
 

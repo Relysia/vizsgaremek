@@ -4,7 +4,7 @@ import PexelsVideoApi from '../../api/PexelsApi';
 import VideoBackground from '../utils/VideoBackground';
 import { HiUserGroup } from 'react-icons/hi';
 import { GiFamilyHouse } from 'react-icons/gi';
-import { GiCommercialAirplane } from 'react-icons/gi';
+import { AiFillCar } from 'react-icons/ai';
 import { IoFastFoodSharp } from 'react-icons/io5';
 import axios from 'axios';
 import Alert from '../alert/Alert';
@@ -56,7 +56,7 @@ function Budget(props) {
   }, []);
 
   return (
-    <div className='no-overflow'>
+    <section>
       {!message ? (
         <>
           <VideoBackground video={bgVideo} />
@@ -75,7 +75,7 @@ function Budget(props) {
                       <h3>Rent</h3>
                     </div>
                     <div onClick={() => setActive('travel')}>
-                      <GiCommercialAirplane />
+                      <AiFillCar />
                       <h3>Travel</h3>
                     </div>
                     <div onClick={() => setActive('food')}>
@@ -101,7 +101,7 @@ function Budget(props) {
       ) : (
         <Alert alert={true} message={message} />
       )}
-    </div>
+    </section>
   );
 }
 

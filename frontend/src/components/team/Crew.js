@@ -36,7 +36,7 @@ function Crew(props) {
   }, []);
 
   return (
-    <div className='no-overflow'>
+    <section>
       {!message ? (
         <>
           <VideoBackground video={bgVideo} />
@@ -77,7 +77,7 @@ function Crew(props) {
       ) : (
         <Alert alert={true} message={message} />
       )}
-    </div>
+    </section>
   );
 }
 

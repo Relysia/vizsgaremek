@@ -158,10 +158,17 @@
   display: flex
   align-items: center
   width: 260px
+  animation: calendarEventFadeIn 1s
   $num-colors: 90
   @for $i from 0 to $num-colors
     &:nth-child(#{$i})
       @include random-bgr()
+
+@keyframes calendarEventFadeIn
+  0%
+    opacity: 0
+  100%
+    opacity: 1
 
 .event-time
   display: flex
