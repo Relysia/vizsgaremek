@@ -3,7 +3,7 @@
 ## First things to do
 
 ### 1. Installing dependencies
-In the backend folder / in the frontend folder / in the root folder - needed for concurrently
+In the backend folder & in the frontend folder & in the root folder - needed for concurrently
 ```node
 npm install
 ```
