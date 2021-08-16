@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IoPlaySkipBackCircleSharp } from 'react-icons/io5';
+import Moment from 'react-moment';
 import axios from 'axios';
 
 function UpcommingEvent({ setActive, leader }) {
@@ -44,35 +45,40 @@ function UpcommingEvent({ setActive, leader }) {
       <IoPlaySkipBackCircleSharp className='back-button' onClick={() => setActive(false)} />
       <h2>Upcomming</h2>
       {role && !role.share && <p className='upcomming-noshare'>Team calendar is not shared with you yet</p>}
-      {data && data.length > 0
-        ? data.map((event, i) => (
-            <div key={i} className='event-container'>
-              <h3>{event.summary}</h3>
-              <div className='event-time'>
-                <div className='event-start'>
-                  <p>{event.start.dateTime.slice(11, 16)}</p>
-                  <p>{event.start.dateTime.slice(0, 10)}</p>
+      <div className='event-style'>
+        {data && data.length > 0
+          ? data.map((event, i) => (
+              <div key={i} className='event-container'>
+                <div className='event-time'>
+                  <Moment format='ddd'>{event.start.dateTime}</Moment>
+                  <Moment format='D'>{event.start.dateTime}</Moment>
+                  <Moment format='HH:mm'>{event.start.dateTime}</Moment>
                 </div>
-                <div className='event-duration'>
-                  <p>Duration:</p>
-                  <p>{parseInt(event.end.dateTime.slice(11, 16)) - parseInt(event.start.dateTime.slice(11, 16))} Hour</p>
+                <div className='event-details'>
+                  <h3>{event.summary}</h3>
+                  <Moment fromNow>{event.start.dateTime}</Moment>
+                  <div className='event-duration'>
+                    <p>Duration:</p>
+                    <Moment duration={event.start.dateTime} date={event.end.dateTime} format='H' />
+                    <p>Hour(s)</p>
+                  </div>
+                  {role && role.join ? (
+                    <a href={event.htmlLink} target='_blank' rel='noreferrer'>
+                      Show in Calendar
+                    </a>
+                  ) : (
+                    leader && (
+                      <a href={event.htmlLink} target='_blank' rel='noreferrer'>
+                        Show in Calendar
+                      </a>
+                    )
+                  )}
                 </div>
               </div>
-              {role && role.join ? (
-                <a href={event.htmlLink} target='_blank' rel='noreferrer'>
-                  Show in Google Calendar
-                </a>
-              ) : (
-                leader && (
-                  <a href={event.htmlLink} target='_blank' rel='noreferrer'>
-                    Show in Google Calendar
-                  </a>
-                )
-              )}
-            </div>
-          ))
-        : data && data.length < 1 && <h3>No team events yet</h3>}
-      {role && !role.join && role.share && <p className='upcomming-noshare'>You can add these events to your google calendar in the crew menu</p>}
+            ))
+          : data && data.length < 1 && <h3>No team events yet</h3>}
+        {role && !role.join && role.share && <p className='upcomming-noshare'>You can add these events to your google calendar in the crew menu</p>}
+      </div>
     </div>
   );
 }

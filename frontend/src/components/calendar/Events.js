@@ -30,10 +30,10 @@ function Events(props) {
       .catch((err) => setMessage(err.response.data));
   };
 
-  const calendarAuth = () => {
+  const teamAuth = () => {
     const jwt = localStorage.getItem('jwt');
 
-    const url = `${process.env.REACT_APP_BACKEND_HOST}/api/calendar/calendarauth`;
+    const url = `${process.env.REACT_APP_BACKEND_HOST}/api/team/teamauth`;
 
     const auth = { Authorization: jwt };
 
@@ -46,12 +46,12 @@ function Events(props) {
 
   useEffect(() => {
     PexelsVideoApi('5363068', setBgVideo);
-    calendarAuth();
+    teamAuth();
     getRoles();
   }, []);
 
   return (
-    <div>
+    <div className='no-overflow'>
       {!message ? (
         <>
           <VideoBackground video={bgVideo} />

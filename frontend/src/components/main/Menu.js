@@ -69,8 +69,16 @@ function Menu({ setMenuActive, playAnimation }) {
                     </Link>
                   </div>
                   <div>
-                    <FaCameraRetro />
-                    <h3>Summary</h3>
+                    <Link
+                      to='/summary'
+                      onClick={(e) => {
+                        delayAndGo(e, '/summary');
+                        setMenuActive(false);
+                        playAnimation();
+                      }}>
+                      <FaCameraRetro />
+                      <h3>Summary</h3>
+                    </Link>
                   </div>
                 </div>
               </div>

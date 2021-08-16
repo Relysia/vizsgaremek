@@ -6,7 +6,7 @@ const { confirm } = require('../controllers/auth/confirmController');
 const { getUser } = require('../controllers/user/getUserController');
 const { getRoles } = require('../controllers/auth/getRolesController');
 const { setRole } = require('../controllers/auth/setRoleController');
-const { pexelsApi } = require('../controllers/api/pexelsApiController');
+const { pexelsVideoApi, pexelsPhotoApi } = require('../controllers/api/pexelsApiController');
 const userAuthHandler = require('../middleware/userAuthHandler');
 
 router.get('/', (req, res) => {
@@ -19,7 +19,9 @@ router.post('/login', login);
 router.post('/confirm', confirm);
 
 // Get Pexels Video
-router.post('/pexelsvideo', pexelsApi);
+router.post('/pexelsvideo', pexelsVideoApi);
+// Get Pexels Photo
+router.post('/pexelsphoto', pexelsPhotoApi);
 
 // User requests
 router.post('/user', getUser);

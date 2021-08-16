@@ -1,0 +1,38 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    image: filmsquad_frontend
+    container_name: filmsquad_react_client
+    stdin_open: true
+    ports:
+      - '80:80'
+    networks:
+      - filmsquad
+  backend:
+    build: ./backend
+    image: filmsquad_backend
+    container_name: filmsquad_node_server
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mongo
+    networks:
+      - filmsquad
+  mongo:
+    image: mongo
+    container_name: filmsquad-mongodb
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - '27017:27017'
+    networks:
+      - filmsquad
+networks:
+  filmsquad:
+    driver: bridge
+volumes:
+  data-volume:
+  node_modules:
+  web-root:
+    driver: local

@@ -1,17 +1,18 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect, lazy, Suspense } from 'react';
 import './sass/App.sass';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-import Landing from './components/main/Landing';
-import Home from './components/main/Home';
-import RoleSelect from './components/main/RoleSelect';
 import Navbar from './components/main/Navbar';
-import Confirm from './components/auth/Confirm';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
-import Budget from './components/budget/Budget';
-import Crew from './components/team/Crew';
-import Events from './components/calendar/Events';
+import Home from './components/main/Home';
+
+const RoleSelect = lazy(() => import('./components/main/RoleSelect'));
+const Confirm = lazy(() => import('./components/auth/Confirm'));
+const Register = lazy(() => import('./components/auth/Register'));
+const Login = lazy(() => import('./components/auth/Login'));
+const Crew = lazy(() => import('./components/team/Crew'));
+const Budget = lazy(() => import('./components/budget/Budget'));
+const Events = lazy(() => import('./components/calendar/Events'));
+const Summary = lazy(() => import('./components/summary/Summary'));
 
 export const UserContext = createContext(null);
 export const MenuContext = createContext(false);
@@ -67,38 +68,45 @@ function App() {
               {user && !user.firstTime ? (
                 <>
                   <Route path='/' exact component={Home}></Route>
-                  <Route path='/budget' exact component={Budget}></Route>
-                  <Route path='/crew' exact component={Crew}></Route>
-                  <Route path='/events' exact component={Events}></Route>
-                  <Route
-                    path='/gasprice'
-                    component={() => {
-                      window.location.href = 'https://holtankoljak.hu/';
-                      return null;
-                    }}></Route>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Route path='/budget' exact component={Budget}></Route>
+                    <Route path='/crew' exact component={Crew}></Route>
+                    <Route path='/events' exact component={Events}></Route>
+                    <Route path='/summary' exact component={Summary}></Route>
+                    <Route
+                      path='/gasprice'
+                      component={() => {
+                        window.location.href = 'https://holtankoljak.hu/';
+                        return null;
+                      }}></Route>
+                  </Suspense>
                 </>
               ) : user && user.firstTime ? (
                 <>
-                  <Route path='/' exact component={RoleSelect}></Route>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Route path='/' exact component={RoleSelect}></Route>
+                  </Suspense>
                 </>
               ) : (
                 <>
-                  <Route path='/' exact component={Landing}></Route>
-                  <Route
-                    path='/googlereg'
-                    component={() => {
-                      window.location.href = googleRegUrl;
-                      return null;
-                    }}></Route>
-                  <Route
-                    path='/googleauth'
-                    component={() => {
-                      window.location.href = googleAuthUrl;
-                      return null;
-                    }}></Route>
-                  <Route path='/login' component={Login}></Route>
-                  <Route path='/register' component={Register}></Route>
-                  <Route path='/confirm' component={Confirm}></Route>
+                  <Route path='/' exact component={Home}></Route>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Route
+                      path='/googlereg'
+                      component={() => {
+                        window.location.href = googleRegUrl;
+                        return null;
+                      }}></Route>
+                    <Route
+                      path='/googleauth'
+                      component={() => {
+                        window.location.href = googleAuthUrl;
+                        return null;
+                      }}></Route>
+                    <Route path='/login' component={Login}></Route>
+                    <Route path='/register' component={Register}></Route>
+                    <Route path='/confirm' component={Confirm}></Route>
+                  </Suspense>
                 </>
               )}
             </Switch>

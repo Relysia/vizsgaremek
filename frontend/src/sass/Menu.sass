@@ -1,6 +1,6 @@
 .menu-button
-  z-index: 3
-  position: absolute
+  z-index: 6
+  position: fixed
   bottom: 11px
   left: 50%
   transform: translateX(-50%)
@@ -11,7 +11,7 @@
   animation: menuFadeIn 1s
   &:hover
     color: #eb4917
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    cursor: url("../assets/cursorpointer.png") 10 1, pointer
 
 .menu-container
   position: absolute
@@ -19,17 +19,18 @@
   left: 0
   z-index: 2
   color: #fff
-  height: 100vh
-  width: 100vw
+  height: 100%
+  width: 100%
   background: #00000079
   display: flex
   flex-direction: column
   align-items: center
   animation: menuFadeIn 1.5s
+  overflow: hidden
 
 .menu-options
   z-index: 2
-  position: absolute
+  position: fixed
   width: 100%
   height: 100%
   display: flex
@@ -46,7 +47,7 @@
       text-align: center
       &:hover
         color: #eb4917
-        cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+        cursor: url("../assets/cursorpointer.png") 10 1, pointer
     svg
       font-size: 10rem
     h3

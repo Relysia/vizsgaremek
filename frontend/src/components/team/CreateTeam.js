@@ -5,6 +5,7 @@ import axios from 'axios';
 
 function CreateTeam({ setActive }) {
   let history = useHistory();
+  const [message, setMessage] = useState(null);
   const [joinChecked, setJoinChecked] = useState(true);
   const [budgetChecked, setBudgetChecked] = useState(true);
   const [title, setTitle] = useState('');
@@ -12,7 +13,9 @@ function CreateTeam({ setActive }) {
   const [progress, setProgress] = useState(false);
 
   const createTeam = (title, joinPublic, budgetPublic, teamRole) => {
-    setProgress(true);
+    if (title !== '' && teamRole !== '') {
+      setProgress(true);
+    }
     const jwt = localStorage.getItem('jwt');
 
     const url = `${process.env.REACT_APP_BACKEND_HOST}/api/team/create`;
@@ -31,7 +34,12 @@ function CreateTeam({ setActive }) {
         setActive(false);
         history.go(0);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setMessage(err.response.data);
+        setTimeout(() => {
+          setMessage(null);
+        }, 4000);
+      });
   };
 
   return (
@@ -50,7 +58,7 @@ function CreateTeam({ setActive }) {
         <p>People can see your budget</p>
         <input type='checkbox' name='budgetPublic' value='budgetPublic' checked={budgetChecked} onChange={() => setBudgetChecked(!budgetChecked)} />
       </div>
-      {!progress ? <button onClick={() => createTeam(title, joinChecked, budgetChecked, teamRole)}>Create</button> : <p className='team-progress'>Creating your team</p>}
+      {!progress && !message ? <button onClick={() => createTeam(title, joinChecked, budgetChecked, teamRole)}>Create</button> : progress && !message ? <p className='team-progress'>Creating your team</p> : !progress && message && <p className='team-required'>{message}</p>}
     </div>
   );
 }

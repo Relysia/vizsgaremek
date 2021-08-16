@@ -9,7 +9,7 @@ exports.upcommingEvent = async (req, res) => {
 
   const calendar_id = user.team.calendar_id;
 
-  const url = `https://www.googleapis.com/calendar/v3/calendars/${calendar_id}/events`;
+  const url = `https://www.googleapis.com/calendar/v3/calendars/${calendar_id}/events?singleEvents=true&orderBy=startTime`;
 
   const config = {
     headers: {

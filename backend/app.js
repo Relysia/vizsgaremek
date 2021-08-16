@@ -11,6 +11,7 @@ const apiRouter = require('./routes/apiRouter');
 const budgetRouter = require('./routes/budgetRouter');
 const teamRouter = require('./routes/teamRouter');
 const calendarRouter = require('./routes/calendarRouter');
+const summaryRouter = require('./routes/summaryRouter');
 const errorHandler = require('./middleware/errorHandler');
 const userExistsHandler = require('./middleware/userExistsHandler');
 const userAuthHandler = require('./middleware/userAuthHandler');
@@ -23,8 +24,8 @@ app.set('view engine', 'jade');
 
 //Set cors
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, access-control-allow-origin');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
@@ -32,7 +33,7 @@ app.use(function (req, res, next) {
 
 //Can post from frontend
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: '*',
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -51,6 +52,7 @@ app.use(userAuthHandler);
 app.use('/api/budget', budgetRouter);
 app.use('/api/team', teamRouter);
 app.use('/api/calendar', calendarRouter);
+app.use('/api/summary', summaryRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

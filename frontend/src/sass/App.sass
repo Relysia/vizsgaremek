@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap')
-@import url('https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@1,700&display=swap')
+// @import url('https://fonts.googleapis.com/css2?family=Amaranth:ital,wght@1,700&family=Roboto:wght@300;400;700&display=swap')
 @import ./Landing.sass
 @import ./Navbar.sass
 @import ./Alert.sass
@@ -10,6 +9,7 @@
 @import ./Budget.sass
 @import ./Crew.sass
 @import ./Calendar.sass
+@import ./Summary.sass
 
 *
   font-size: 10px
@@ -22,7 +22,7 @@
 body
   background: #080808
   overflow: hidden
-  cursor: url("https://i.ibb.co/N6KSxjs/cursornormal.png") 3 1, auto
+  cursor: url("../assets/cursornormal.png") 3 1, auto
 
 video
   object-fit: cover
@@ -55,23 +55,26 @@ video
   transition: .4s
   &:hover
     color: #eb4917
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    cursor: url("../assets/cursorpointer.png") 10 1, pointer
 
 .top-bar
-  z-index: 2
+  z-index: 5
   width: 100vw
   background: #000
-  position: absolute
+  position: fixed
   top: 0
   height: 70px
 
 .bot-bar
-  z-index: 2
+  z-index: 5
   width: 100vw
   background: #000
-  position: absolute
+  position: fixed
   bottom: 0
   height: 70px
+
+.no-overflow
+  overflow: hidden
 
 .fade-animation
   width: 100vw

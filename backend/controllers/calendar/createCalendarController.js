@@ -7,6 +7,14 @@ exports.createCalendar = async (req, res) => {
   const { title, joinPublic, budgetPublic, teamRole } = req.body;
   const { google_id, access_token } = jwt_decode(jwt);
 
+  if (!title) {
+    return res.status(400).send('Title is required!');
+  }
+
+  if (!teamRole) {
+    return res.status(400).send('Team role is required!');
+  }
+
   const url = `https://www.googleapis.com/calendar/v3/calendars`;
 
   const config = {

@@ -35,7 +35,7 @@ exports.createTeam = async (data, res, google_id, title, joinPublic, budgetPubli
 
       await team.save();
 
-      res.send('New team is created!');
+      return res.send('New team is created!');
     })
     .catch((err) => {
       console.log(err);

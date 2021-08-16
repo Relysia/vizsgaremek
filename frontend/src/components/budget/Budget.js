@@ -56,7 +56,7 @@ function Budget(props) {
   }, []);
 
   return (
-    <div>
+    <div className='no-overflow'>
       {!message ? (
         <>
           <VideoBackground video={bgVideo} />

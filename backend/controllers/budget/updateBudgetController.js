@@ -20,6 +20,10 @@ exports.updateBudget = async (req, res) => {
         if (third !== '') {
           budgetItem[0].cast_cost = third;
         }
+
+        const total = budget[type].map((data) => data.cast_cost).reduce((a, b) => a + b, 0);
+
+        budget.cast_total = total;
       }
 
       if (type === 'rent') {
@@ -32,6 +36,10 @@ exports.updateBudget = async (req, res) => {
         if (third !== '') {
           budgetItem[0].rent_cost = third;
         }
+
+        const total = budget[type].map((data) => data.rent_cost).reduce((a, b) => a + b, 0);
+
+        budget.rent_total = total;
       }
 
       if (type === 'travel') {
@@ -44,6 +52,23 @@ exports.updateBudget = async (req, res) => {
         if (third !== '') {
           budgetItem[0].travel_litre_cost = third;
         }
+
+        const travelArray = budget[type].map((data) => data);
+
+        const reducer = (acc, curr) => acc + curr;
+
+        let distanceArray = travelArray.map((item) => item.travel_distance);
+        let distance = distanceArray.reduce(reducer);
+
+        let consumptionArray = travelArray.map((item) => item.travel_car_cons);
+        let consumption = consumptionArray.reduce(reducer);
+
+        let litreArray = travelArray.map((item) => item.travel_litre_cost);
+        let litrePrice = litreArray.reduce(reducer);
+
+        const total = Math.round((distance / 100) * (consumption / consumptionArray.length) * (litrePrice / litreArray.length));
+
+        budget.travel_total = total;
       }
 
       if (type === 'food') {
@@ -53,6 +78,10 @@ exports.updateBudget = async (req, res) => {
         if (second !== '') {
           budgetItem[0].food_cost = second;
         }
+
+        const total = budget[type].map((data) => data.food_cost).reduce((a, b) => a + b, 0);
+
+        budget.food_total = total;
       }
 
       await budget.save();

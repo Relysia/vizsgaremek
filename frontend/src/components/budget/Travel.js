@@ -20,35 +20,15 @@ function Travel({ setActive, leader }) {
   // Type of budget
   const budgetType = 'travel';
 
-  // Travel Distance Calculator
-  const totalTravelPrice = () => {
-    if (data !== null) {
-      if (data.length > 0) {
-        const details = data.map((data) => data);
-
-        const reducer = (acc, curr) => acc + curr;
-
-        let distanceArray = details.map((item) => item.travel_distance);
-        let distance = distanceArray.reduce(reducer);
-
-        let consumptionArray = details.map((item) => item.travel_car_cons);
-        let consumption = consumptionArray.reduce(reducer);
-
-        let litreArray = details.map((item) => item.travel_litre_cost);
-        let litrePrice = litreArray.reduce(reducer);
-
-        return Math.round((distance / 100) * (consumption / consumptionArray.length) * (litrePrice / litreArray.length));
-      }
-    }
-  };
-
   // Format Total Price
   const formatter = new Intl.NumberFormat('hu-HU', {
     style: 'currency',
     currency: 'HUF',
     minimumFractionDigits: 0,
   });
-  const formatTotal = formatter.format(totalTravelPrice());
+
+  const total = data && data.total;
+  const formatTotal = formatter.format(total);
 
   // Get input field in focus
   const jumpToInput = (e) => {
@@ -91,14 +71,14 @@ function Travel({ setActive, leader }) {
           </Link>
         </div>
       )}
-      {data && data.length > 0 ? (
+      {data && data.budget.length > 0 ? (
         <div className='table-container'>
           <div className='table-title'>
             <p>Distance (Km)</p>
             <p>Consumption (L)</p>
             <p>1 Litre Cost (Ft)</p>
           </div>
-          {data.map((data) => (
+          {data.budget.map((data) => (
             <TravelTable leader={leader} key={data._id} data={data} updateCast={updateCast} deleteCast={deleteCast} />
           ))}
           <p className='total-cost'>Total: {formatTotal}</p>

@@ -1,7 +1,7 @@
 const User = require('../../models/user');
 const jwt_decode = require('jwt-decode');
 
-const calendarAuth = async (req, res) => {
+const teamAuth = async (req, res) => {
   const jwt = req.headers.authorization;
   const { google_id } = jwt_decode(jwt);
   const user = await User.findOne({ google_id });
@@ -16,9 +16,7 @@ const calendarAuth = async (req, res) => {
     }
   }
 
-  const userTeam = 'Team found!';
-
-  return res.send(userTeam);
+  return res.status(200).json('Success!');
 };
 
-module.exports = calendarAuth;
+module.exports = teamAuth;

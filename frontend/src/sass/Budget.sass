@@ -5,9 +5,9 @@
     opacity: 1
 
 .budget-submenu
-  position: absolute
+  position: fixed
   top: 70px
-  height: calc(100vh - 140px)
+  height: calc(100% - 140px)
   width: 100vw
   background: #00000088
   display: flex
@@ -36,7 +36,7 @@
     transition: .4s
     &:hover
       color: #eb4917
-      cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+      cursor: url("../assets/cursorpointer.png") 10 1, pointer
 
 .budget-input-container
   width: 675px
@@ -70,7 +70,7 @@
     border: none
     text-align: center
     color: #fff
-    cursor: url("https://i.ibb.co/gSHMGzf/cursortext.png") 10 16, text
+    cursor: url("../assets/cursortext.png") 10 16, text
     &:focus
       outline: none
       border: 1px solid #fff
@@ -84,7 +84,7 @@
     transition: .4s
     &:hover
       color: #eb4917
-      cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+      cursor: url("../assets/cursorpointer.png") 10 1, pointer
 
 .table-title
   position: sticky
@@ -126,7 +126,7 @@
       background: none
       border: none
       text-align: center
-      cursor: url("https://i.ibb.co/gSHMGzf/cursortext.png") 10 16, text
+      cursor: url("../assets/cursortext.png") 10 16, text
       &:focus
         outline: none
         border: 2px solid #fff
@@ -142,7 +142,7 @@
       color: #f85959
       &:hover
         color: #bd0303
-        cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+        cursor: url("../assets/cursorpointer.png") 10 1, pointer
     svg:nth-of-type(1)
       top: 5px
       right: 35px
@@ -165,13 +165,14 @@
   margin-top: -5px
   margin-bottom: 15px
   a
+    text-decoration: underline
     color: #fff
     font-size: 1.8rem
     padding: 3px 8px
     transition: .4s
     &:hover
       color: #eb4917
-      cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+      cursor: url("../assets/cursorpointer.png") 10 1, pointer
 
 @media (max-width: 700px)
   .budget-title
@@ -222,7 +223,7 @@
         width: 100%
       &:hover
         color: #bd0303
-        cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+        cursor: url("../assets/cursorpointer.png") 10 1, pointer
       svg:nth-of-type(1)
         font-size: 1.9rem
         top: 5.5px

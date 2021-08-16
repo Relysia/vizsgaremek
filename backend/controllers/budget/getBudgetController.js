@@ -13,5 +13,20 @@ exports.getBudget = async (req, res) => {
 
   const budget = await Budget.findOne({ calendar_id });
 
-  res.send(budget[type]);
+  let total;
+
+  if (type === 'cast') {
+    total = budget.cast_total;
+  }
+  if (type === 'rent') {
+    total = budget.rent_total;
+  }
+  if (type === 'travel') {
+    total = budget.travel_total;
+  }
+  if (type === 'food') {
+    total = budget.food_total;
+  }
+
+  res.send({ budget: budget[type], total });
 };

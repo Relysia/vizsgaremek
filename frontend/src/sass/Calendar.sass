@@ -1,8 +1,8 @@
 .newevent-container
-  position: absolute
+  position: fixed
   top: 70px
-  height: calc(100vh - 140px)
-  width: 100vw
+  height: calc(100% - 140px)
+  width: 100%
   background: #00000088
   display: flex
   flex-direction: column
@@ -42,7 +42,7 @@
     margin-bottom: 7px
     box-sizing: content-box
     border-bottom: 3px solid #fff
-    cursor: url("https://i.ibb.co/gSHMGzf/cursortext.png") 10 16, text
+    cursor: url("../assets/cursortext.png") 10 16, text
     &::placeholder
       opacity: .7
     &:focus
@@ -69,7 +69,7 @@
     background: linear-gradient(to right bottom, #eb4917, #a71e0c)
     color: #ffffff
     padding: 5px 15px
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    cursor: url("../assets/cursorpointer.png") 10 1, pointer
     transition: .4s
     animation: eventMessageFadeUp 1s
     &:hover
@@ -85,8 +85,8 @@
     font-size: 1.5rem
     text-shadow: 1px 1px 2px #000
     text-transform: uppercase
-    font-weight: 600
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
+    font-weight: 700
+    cursor: url("../assets/cursorpointer.png") 10 1, pointer
   option
     font-size: 1.5rem
     &:nth-of-type(1)
@@ -119,20 +119,21 @@
     opacity: 1
 
 .upcomming-event
-  position: absolute
+  position: fixed
   top: 70px
-  height: calc(100vh - 140px)
-  width: 100vw
+  height: calc(100% - 140px)
+  width: 100%
   background: #00000088
   display: flex
-  flex-direction: column
   justify-content: flex-start
+  flex-direction: column
   gap: 20px
   align-items: center
   animation: createTeamFadeIn 1s
   padding: 20px 0
   overflow-y: auto
   overflow-x: hidden
+  text-shadow: 1px 1px 4px #000
   h2
     font-size: 2.5rem
   h3
@@ -140,79 +141,80 @@
   .upcomming-noshare
     font-size: 1.6rem
     text-align: center
-    font-weight: 600
+    font-weight: 700
 
-.google-calendar
+.event-style
   display: flex
-  gap: 5px
+  flex-wrap: wrap
   align-items: center
-  cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
-  transition: .4s
-  &:hover
-    color: #eb4917
-  a
-    color: #fff
-    margin-top: -5px
-    font-size: 1.7rem
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
-    transition: .4s
-    &:hover
-      color: #eb4917
-  svg
-    font-size: 1.6rem
-    margin-top: -4px
+  justify-content: center
+  width: 550px
+  gap: 20px
+
+@mixin random-bgr()
+  background: darken(rgb(255, random(190), random(50)), 10%)
 
 .event-container
   display: flex
-  flex-direction: column
   align-items: center
-  gap: 10px
   width: 260px
-  padding: 8px 0
-  border-radius: 10px
-  background-color: #000000
-  h3
-    font-size: 2rem
-  a
-    font-size: 1.4rem
-    color: #fff
-    text-transform: uppercase
-    margin-bottom: 3px
-    cursor: url("https://i.ibb.co/hBqYm4g/cursorpointer.png") 10 1, pointer
-    transition: .4s
-    &:hover
-      color: #fff9a7
-
-@for $i from 1 through 14
-  .event-container:nth-of-type(#{$i})
-    background-color: darken(#f5503a, $i * 7%)
+  $num-colors: 90
+  @for $i from 0 to $num-colors
+    &:nth-child(#{$i})
+      @include random-bgr()
 
 .event-time
   display: flex
   flex-direction: column
   align-items: center
-  border: 2px solid #fff
-  padding: 2px 5px
-  .event-start
-    display: flex
-    gap: 10px
-    align-items: center
-    p:nth-of-type(1)
-      font-size: 3rem
-      font-weight: 600
-    p:nth-of-type(2)
-      font-size: 1.6rem
+  justify-content: center
+  width: 80px
+  gap: 2px
+  time:nth-of-type(1)
+    font-size: 1.8rem
+  time:nth-of-type(2)
+    font-size: 2rem
+    font-weight: 700
+  time:nth-of-type(3)
+    font-size: 1.5rem
+
+.event-details
+  gap: 5px
+  align-items: center
+  background: #000000bd
+  padding: 7px
+  width: 100%
+  text-align: center
+  h3
+    font-size: 2rem
+    margin-top: 3px
+  time
+    font-size: 1.5rem
   .event-duration
+    margin-top: 7px
     display: flex
-    gap: 5px
-    align-items: center
-    margin-bottom: 5px
+    justify-content: center
+    gap: 4px
+    padding-bottom: 3px
     p:nth-of-type(1)
       text-transform: uppercase
-      font-size: 1.6rem
-      font-weight: 600
+      font-size: 1.5rem
+      font-weight: 700
     p:nth-of-type(2)
-      font-size: 1.6rem
+      font-size: 1.5rem
+  a
+    font-size: 1.4rem
+    color: #fff
+    text-transform: uppercase
+    cursor: url("../assets/cursorpointer.png") 10 1, pointer
+    transition: .4s
+    &:hover
+      color: #bebebe
+
+@media (max-width: 700px)
+  .event-style
+    flex-direction: column
+    flex-wrap: nowrap
 
 @media (max-width: 330px)
   .newevent-input-container

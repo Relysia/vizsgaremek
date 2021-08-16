@@ -25,7 +25,7 @@ function Rent({ setActive, leader }) {
     currency: 'HUF',
     minimumFractionDigits: 0,
   });
-  const total = data && data.map((data) => data.rent_cost).reduce((a, b) => a + b, 0);
+  const total = data && data.total;
   const formatTotal = formatter.format(total);
 
   // Get input field in focus
@@ -60,14 +60,14 @@ function Rent({ setActive, leader }) {
     <div className='budget-submenu'>
       <IoPlaySkipBackCircleSharp className='back-button' onClick={() => setActive(false)} />
       <h2>Rent</h2>
-      {data && data.length > 0 ? (
+      {data && data.budget.length > 0 ? (
         <div className='table-container'>
           <div className='table-title'>
             <p>Type</p>
             <p>Name</p>
             <p>Cost (Ft)</p>
           </div>
-          {data.map((data) => (
+          {data.budget.map((data) => (
             <RentTable leader={leader} key={data._id} data={data} updateCast={updateCast} deleteCast={deleteCast} />
           ))}
           <p className='total-cost'>Total: {formatTotal}</p>

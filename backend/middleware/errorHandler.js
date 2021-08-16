@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(500).send('Something went wrong. Please login again!');
+  res.status(500).send('There is a server error!');
 };
 
 module.exports = errorHandler;

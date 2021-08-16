@@ -1,7 +1,6 @@
 const User = require('../../models/user');
 const Team = require('../../models/team');
 const jwt_decode = require('jwt-decode');
-const axios = require('axios');
 
 exports.calendarRole = async (req, res) => {
   const jwt = req.headers.authorization;

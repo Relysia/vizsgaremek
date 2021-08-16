@@ -25,6 +25,10 @@ const budgetSchema = new mongoose.Schema({
       },
     },
   ],
+  cast_total: {
+    type: Number,
+    default: 0,
+  },
   rent: [
     {
       rent_type: {
@@ -41,6 +45,10 @@ const budgetSchema = new mongoose.Schema({
       },
     },
   ],
+  rent_total: {
+    type: Number,
+    default: 0,
+  },
   travel: [
     {
       travel_distance: {
@@ -57,6 +65,10 @@ const budgetSchema = new mongoose.Schema({
       },
     },
   ],
+  travel_total: {
+    type: Number,
+    default: 0,
+  },
   food: [
     {
       food_day: {
@@ -69,6 +81,10 @@ const budgetSchema = new mongoose.Schema({
       },
     },
   ],
+  food_total: {
+    type: Number,
+    default: 0,
+  },
   public: {
     type: Boolean,
     default: true,

@@ -1,10 +1,12 @@
-import { useContext } from 'react';
+import { useContext, lazy, Suspense } from 'react';
 import { UserContext } from '../../App';
 import { Link, useHistory } from 'react-router-dom';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { AiFillUnlock } from 'react-icons/ai';
 import { AiOutlineUserAdd } from 'react-icons/ai';
-import Menu from './Menu';
+// import Menu from './Menu';
+
+const Menu = lazy(() => import('./Menu'));
 
 function Navbar({ setUser, setMenuActive, playAnimation }) {
   const user = useContext(UserContext);
@@ -49,7 +51,9 @@ function Navbar({ setUser, setMenuActive, playAnimation }) {
               <AiOutlineLogout />
             </Link>
           </div>
-          <Menu setMenuActive={setMenuActive} playAnimation={playAnimation} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Menu setMenuActive={setMenuActive} playAnimation={playAnimation} />
+          </Suspense>
         </>
       ) : (
         <>
