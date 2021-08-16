@@ -6,6 +6,7 @@
   - [Setting up Google Calendar Api](#3-setting-up-google-calendar-api)
   - [Backend .env file content](#4-create-a-env-file-in-the-backend-folder-with-the-following-content)
   - [Frontend .env file content](#5-create-a-env-file-in-the-frontend-folder-with-the-following-content)
+  - [Starting frontend and backend server](#6-starting-frontend-and-backend-server)
 - [Using the application](#using-the-application)
   - [Registration](#1-registration)
   - [Login](#2-login)
@@ -14,7 +15,7 @@
 
 ### 1. Installing dependencies
 In the backend folder & in the frontend folder & in the root folder - needed for concurrently
-```node
+```console
 npm install
 ```
 
@@ -57,6 +58,13 @@ REACT_APP_BACKEND_HOST=http://localhost:8080
 REACT_APP_FRONTEND_HOST=http%3A//localhost:3000 #For testing docker compose use "http%3A//localhost"
 REACT_APP_CLIENT_ID="YOUR GOOGLE API CLIENT ID"
 ```
+
+### 6. Starting frontend and backend server
+Go to the root folder and run:
+```console
+npm start
+```
+This will start both the frontend and the backend with nodemon
 
 ## Using the application
 
