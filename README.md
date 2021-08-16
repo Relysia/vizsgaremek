@@ -1,8 +1,14 @@
 # Filmsquad
 
-- [Installing dependencies](#1-installing-dependencies)
-- [Google API Client ID and Secret](#2-getting-google-api-client-id-and-secret)
-- [Setting up Google Calendar Api](#3-setting-up-google-calendar-api)
+- [First things to do](#first-things-to-do)
+  - [Installing dependencies](#1-installing-dependencies)
+  - [Google API Client ID and Secret](#2-getting-google-api-client-id-and-secret)
+  - [Setting up Google Calendar Api](#3-setting-up-google-calendar-api)
+  - [Backend .env file content](#4-create-a-env-file-in-the-backend-folder-with-the-following-content)
+  - [Frontend .env file content](#5-create-a-env-file-in-the-frontend-folder-with-the-following-content)
+- [Using the application](#using-the-application)
+  - [Registration](#1-registration)
+  - [Login](#2-login)
 
 ## First things to do
 
