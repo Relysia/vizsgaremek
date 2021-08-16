@@ -28,12 +28,12 @@ npm install
 ```console
 http://localhost
 ```
-8. Authorized redirect URIs:
+7. Authorized redirect URIs:
 ```console
 http://localhost/register
 http://localhost/login
 ```
-6. Copy Client ID and Client Secret
+8. Copy Client ID and Client Secret
 
 ### 3. Setting up Google Calendar Api
 1. APIs & Services -> Dashboard -> Enable APIs and Services -> Search for Calendar -> Select Google Calendar Api -> Enable
