@@ -26,9 +26,9 @@ const userTeam = async (req, res) => {
     members.push({ name: member.name, email: member.email, picture: member.picture, role: member.role, share: member.calendar_share, join: member.calendar_join });
   });
 
-  const public = team.public;
+  const teamPublic = team.public;
 
-  res.send({ title, leader, members, public });
+  res.send({ title, leader, members, public: teamPublic });
 };
 
 module.exports = userTeam;

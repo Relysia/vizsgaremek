@@ -1,11 +1,11 @@
 {
-  "name": "todo",
+  "name": "filmsquad",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.5",
@@ -25,6 +25,7 @@
     "morgan": "~1.9.1"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.20.0",
     "jest": "^27.0.6",
     "mongodb-memory-server": "^7.3.2",
     "nodemon": "^2.0.12",

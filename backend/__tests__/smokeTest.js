@@ -3,7 +3,7 @@ const supertest = require('supertest');
 const request = supertest(app);
 const mongoose = require('mongoose');
 
-const { startServer, stopServer, deleteAll } = require('./util/inMemDb');
+const { startServer, stopServer, clearDatabase } = require('./util/inMemDb');
 
 describe('Smoke tests', () => {
   test('Jest works', () => {
@@ -23,7 +23,7 @@ describe('Smoke tests', () => {
     const doc = await Cat.findOne();
 
     expect(doc.name).toBe('Cicuska');
-    await deleteAll([Cat]);
+    await clearDatabase();
 
     const result = await Cat.countDocuments();
 
@@ -32,8 +32,9 @@ describe('Smoke tests', () => {
   });
 
   test('Supertest works', async () => {
-    const response = await request.get('/api/something/not-exist');
+    const response = await request.get('/');
 
-    expect(response.status).toBe(404);
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('Backend is working!');
   });
 });

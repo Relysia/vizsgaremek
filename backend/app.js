@@ -49,8 +49,8 @@ app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use(userExistsHandler);
 app.use(userAuthHandler);
-app.use('/api/budget', budgetRouter);
 app.use('/api/team', teamRouter);
+app.use('/api/budget', budgetRouter);
 app.use('/api/calendar', calendarRouter);
 app.use('/api/summary', summaryRouter);
 

@@ -26,9 +26,9 @@ exports.upcommingEvent = async (req, res) => {
         events.push({ summary: event.summary, start: { dateTime: event.start.dateTime }, end: { dateTime: event.end.dateTime }, htmlLink: event.htmlLink });
       });
 
-      res.send(events);
+      return res.send(events);
     })
     .catch((err) => {
-      res.send(err);
+      return res.status(400).send('Error getting calendar events!');
     });
 };

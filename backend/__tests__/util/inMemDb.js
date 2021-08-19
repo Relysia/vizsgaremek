@@ -1,34 +1,35 @@
-const mongoose = require('mongoose')
-const { MongoMemoryServer } = require('mongodb-memory-server')
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
-const startServer = async (serverName) => {
-  const mongoServer = await MongoMemoryServer.create()
+let mongoServer;
+
+const startServer = async () => {
+  mongoServer = await MongoMemoryServer.create();
 
   await mongoose.connect(mongoServer.getUri(), {
     useNewUrlParser: true,
-    dbName: serverName,
+    dbName: 'TestDB',
     useCreateIndex: true,
-    useUnifiedTopology: true
-  })
+    useUnifiedTopology: true,
+  });
+};
 
-  return mongoServer
-}
+const stopServer = async () => {
+  await mongoose.connection.close();
+  await mongoose.disconnect();
+  await mongoServer.stop();
+};
 
-const stopServer = async (mongoServer) => {
-  await mongoose.connection.close()
-  await mongoose.disconnect()
-  await mongoServer.stop()
-}
-
-const deleteAll = async (models) => {
-  const deletions = models.map(model => model.deleteMany())
-
-  await Promise.all(deletions)
-}
-
+const clearDatabase = async () => {
+  const collections = mongoose.connection.collections;
+  for (const key in collections) {
+    const collection = collections[key];
+    await collection.deleteMany();
+  }
+};
 
 module.exports = {
   startServer,
   stopServer,
-  deleteAll
-}
+  clearDatabase,
+};

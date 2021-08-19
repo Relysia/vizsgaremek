@@ -33,6 +33,6 @@ exports.createCalendar = async (req, res) => {
       createTeam(data.data, res, google_id, title, joinPublic, budgetPublic, teamRole);
     })
     .catch((err) => {
-      console.log(err.response);
+      res.status(400).send('Error creating team');
     });
 };

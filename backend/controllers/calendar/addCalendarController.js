@@ -36,7 +36,6 @@ exports.addCalendar = async (req, res) => {
       res.send(response.data);
     })
     .catch((err) => {
-      console.log(err);
-      res.send(err);
+      res.status(400).send('Error adding calendar!');
     });
 };

@@ -85,10 +85,9 @@ exports.updateBudget = async (req, res) => {
       }
 
       await budget.save();
+      return res.send('Successfully updated budget details!');
     })
     .catch((err) => {
-      console.log(err);
+      return res.status(404).send('Team not found!');
     });
-
-  res.send('Successfully updated cast details!');
 };

@@ -3,8 +3,8 @@ const Team = require('../../models/team');
 const getTeam = async (req, res) => {
   const team = await Team.find();
 
-  if (!team) {
-    res.status(400).send('No team available to join!');
+  if (team.length < 1) {
+    return res.status(400).send('No team available to join!');
   }
 
   const teamDetails = [];
@@ -13,7 +13,7 @@ const getTeam = async (req, res) => {
     teamDetails.push({ title: team.title, calendar_id: team.calendar_id, name: team.leader.name, picture: team.leader.picture, public: team.public });
   });
 
-  res.send(teamDetails);
+  return res.send(teamDetails);
 };
 
 module.exports = getTeam;

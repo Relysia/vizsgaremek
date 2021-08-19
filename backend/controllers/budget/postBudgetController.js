@@ -8,11 +8,11 @@ exports.postBudget = async (req, res) => {
   const budget = await Budget.findOne({ google_id });
 
   if (!budget) {
-    res.status(404).send('You need to create a team first!');
+    return res.status(404).send('You need to create a team first!');
   }
 
   if (first === '' || second === '') {
-    res.status(400).send('You need to fill out all input field!');
+    return res.status(400).send('You need to fill out all input field!');
   }
 
   if (type === 'cast') {
@@ -59,5 +59,5 @@ exports.postBudget = async (req, res) => {
 
   await budget.save();
 
-  res.json('Successfully added new cast member!');
+  return res.send('Successfully added new cast member!');
 };

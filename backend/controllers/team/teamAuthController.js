@@ -16,7 +16,7 @@ const teamAuth = async (req, res) => {
     }
   }
 
-  return res.status(200).json('Success!');
+  return res.status(200).send('Success!');
 };
 
 module.exports = teamAuth;

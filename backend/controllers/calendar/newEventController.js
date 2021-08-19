@@ -46,11 +46,9 @@ exports.newEvent = async (req, res) => {
   axios
     .post(url, body, config)
     .then((response) => {
-      console.log(response.data);
       res.send('Event has been recorded successfully!');
     })
     .catch((err) => {
-      res.send('There was an error, sending your event!');
-      console.log(err);
+      return res.status(400).send('There was an error, sending your event!');
     });
 };
