@@ -24,7 +24,7 @@ const googleAuth = (req, res, redirect, authType) => {
     .then((data) => {
       authType(data.data, res);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.status(400).send('Google Authentication error!'));
 };
 
 module.exports.googleAuth = googleAuth;

@@ -16,7 +16,7 @@ exports.pexelsVideoApi = async (req, res) => {
     .then((response) => {
       res.send(response.data.video_files[3].link);
     })
-    .catch((err) => res.status(400).send(err));
+    .catch((err) => res.status(400).send('Error getting pexels video!'));
 };
 
 exports.pexelsPhotoApi = async (req, res) => {
@@ -35,5 +35,5 @@ exports.pexelsPhotoApi = async (req, res) => {
     .then((response) => {
       res.send(response.data);
     })
-    .catch((err) => res.status(400).send(err));
+    .catch((err) => res.status(400).send('Error getting pexels photo!'));
 };

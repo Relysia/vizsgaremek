@@ -2,11 +2,8 @@ const app = require('../app');
 require('dotenv').config({ path: '.env' });
 const supertest = require('supertest');
 const request = supertest(app);
-const axios = require('axios');
-const MockAdapter = require('axios-mock-adapter');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const Team = require('../models/team');
 
 const { startServer, stopServer, clearDatabase } = require('./util/inMemDb');
 
@@ -17,10 +14,8 @@ describe('Team Router Tests', () => {
 
   let testUser;
   let token;
-  let mock;
 
   beforeEach(async () => {
-    mock = new MockAdapter(axios);
     // Creating auth user in database
     testUser = new User({
       google_id: '123456789',
@@ -39,7 +34,6 @@ describe('Team Router Tests', () => {
 
   afterEach(async () => {
     await clearDatabase();
-    await mock.reset();
   });
 
   afterAll(async () => {

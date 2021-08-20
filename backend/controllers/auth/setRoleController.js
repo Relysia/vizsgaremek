@@ -26,6 +26,6 @@ exports.setRole = async (req, res) => {
       return res.status(200).send(token);
     })
     .catch((err) => {
-      console.log(err);
+      return res.status(400).send('Error changing user role!');
     });
 };

@@ -14,15 +14,9 @@ const sendgrid = (name, uniqueString, email, subject, template) => {
     html: jade.renderFile(path.join(__dirname, `../views/${template}.jade`), { frontendUrl, name, uniqueString, email }),
   };
 
-  sgMail
-    .send(msg)
-    .then((response) => {
-      console.log(response[0].statusCode);
-      console.log(response[0].headers);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  sgMail.send(msg).catch((error) => {
+    console.log('Error sending email!');
+  });
 };
 
 module.exports.sendgrid = sendgrid;
