@@ -2,8 +2,7 @@ version: '3'
 services:
   frontend:
     build: ./frontend
-    image: filmsquad_frontend
-    container_name: filmsquad_react_client
+    container_name: filmsquad_frontend
     stdin_open: true
     ports:
       - '80:80'
@@ -11,8 +10,7 @@ services:
       - filmsquad
   backend:
     build: ./backend
-    image: filmsquad_backend
-    container_name: filmsquad_node_server
+    container_name: filmsquad_backend
     ports:
       - '8080:8080'
     depends_on:
@@ -21,18 +19,29 @@ services:
       - filmsquad
   mongo:
     image: mongo
-    container_name: filmsquad-mongodb
-    volumes:
-      - data-volume:/data/db
+    container_name: filmsquad_mongo
     ports:
       - '27017:27017'
+    networks:
+      - filmsquad
+    volumes:
+      - mongo-data:/data/db
+  mongo-express:
+    image: mongo-express
+    container_name: filmsquad_mongo_express
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_SERVER: mongo
+    ports:
+      - '8081:8081'
+    depends_on:
+      - mongo
     networks:
       - filmsquad
 networks:
   filmsquad:
     driver: bridge
 volumes:
-  data-volume:
-  node_modules:
-  web-root:
+  mongo-data:
     driver: local

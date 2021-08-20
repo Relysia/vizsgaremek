@@ -39,6 +39,7 @@ describe('Team Router Tests', () => {
       calendar_id: '123456789@group.calendar.google.com',
       title: 'The Test Team',
       members: {
+        google_id: '012345678',
         email: 'testjohn@gmail.com',
       },
     });
@@ -156,7 +157,7 @@ describe('Team Router Tests', () => {
     await request.get('/api/calendar/getupcomming').set('Authorization', token).expect(400, 'Error getting calendar events!');
   });
 
-  // ---------------- GET /api/calendar/addcalendar ----------------
+  // ---------------- POST /api/calendar/addcalendar ----------------
   test('GET /api/calendar/addcalendar - should return 400 if access token is bad', async () => {
     await testUser.save();
     await testTeam.save();
@@ -179,5 +180,83 @@ describe('Team Router Tests', () => {
     mock.onPost('https://www.googleapis.com/calendar/v3/users/me/calendarList').reply(200);
 
     await request.post('/api/calendar/addcalendar').set('Authorization', token).send(body).expect(200);
+  });
+
+  // ---------------- POST /api/calendar/calendarrole ----------------
+  test('GET /api/calendar/calendarrole - should return 200 if auth user found in the team members array', async () => {
+    await clearDatabase();
+
+    testUser = new User({
+      google_id: '012345678',
+      name: 'Test John',
+      email: 'testjohn@gmail.com',
+      picture: 'testjohn.jpg',
+      team: {
+        calendar_id: '123456789@group.calendar.google.com',
+        title: 'Test Team Title',
+      },
+    });
+
+    const memberToken = jwt.sign({ google_id: '012345678', access_token: '987654321' }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 });
+
+    await testUser.save();
+    await testTeam.save();
+
+    await request.post('/api/calendar/calendarrole').set('Authorization', memberToken).expect(200);
+  });
+
+  // ---------------- POST /api/calendar/sharecalendar ----------------
+  test('GET /api/calendar/sharecalendar - should return 400 if access token not correct ', async () => {
+    await clearDatabase();
+
+    testUser = new User({
+      google_id: '012345678',
+      name: 'Test John',
+      email: 'testjohn@gmail.com',
+      picture: 'testjohn.jpg',
+      team: {
+        calendar_id: '123456789@group.calendar.google.com',
+        title: 'Test Team Title',
+      },
+    });
+
+    const memberToken = jwt.sign({ google_id: '012345678', access_token: '987654321' }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 });
+
+    await testUser.save();
+    await testTeam.save();
+
+    const body = {
+      email: 'testjohn@gmail.com',
+    };
+
+    await request.post('/api/calendar/sharecalendar').set('Authorization', memberToken).send(body).expect(400, 'Error sharing calendar!');
+  });
+
+  test('GET /api/calendar/sharecalendar - should return 200 if access token is correct ', async () => {
+    await clearDatabase();
+
+    testUser = new User({
+      google_id: '012345678',
+      name: 'Test John',
+      email: 'testjohn@gmail.com',
+      picture: 'testjohn.jpg',
+      team: {
+        calendar_id: '123456789@group.calendar.google.com',
+        title: 'Test Team Title',
+      },
+    });
+
+    const memberToken = jwt.sign({ google_id: '012345678', access_token: '987654321' }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 });
+
+    await testUser.save();
+    await testTeam.save();
+
+    mock.onPost('https://www.googleapis.com/calendar/v3/calendars/123456789@group.calendar.google.com/acl').reply(200);
+
+    const body = {
+      email: 'testjohn@gmail.com',
+    };
+
+    await request.post('/api/calendar/sharecalendar').set('Authorization', memberToken).send(body).expect(200, 'Successfully shared!');
   });
 });

@@ -40,7 +40,6 @@ exports.shareCalendar = async (req, res) => {
       res.send('Successfully shared!');
     })
     .catch((err) => {
-      console.log(err);
-      res.send('Error sharing calendar!');
+      res.status(400).send('Error sharing calendar!');
     });
 };
