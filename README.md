@@ -93,10 +93,11 @@ SENDGRID_EMAIL="SENDGRID API KEY"
 SENDGRID_API=SG.BADAPIKEY  #This is imortant!
 FRONTEND_HOST=http://localhost:3000
 ```
-After that you can run this command:
+Now you can start testing with the following command:
 ```console
 npm run test
 ```
+
 ## API Documentation
 After starting the server locally, go to this endpoint to get the swagger documentation of this api:
 ```console
