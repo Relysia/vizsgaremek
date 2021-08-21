@@ -1,4 +1,5 @@
 # Filmsquad
+In this application, film squad leaders can create teams for their crew. They can also manage their budget for cast members, rentings, traveling and food expenses. They can create new events which is automatically shared between all the crew members and will be added to their google calendar. Other squad members can see an overview of these information, if the team leader makes the team public.
 
 - [First things to do](#first-things-to-do)
   - [Installing dependencies](#1-installing-dependencies)
@@ -10,6 +11,9 @@
 - [Using the application](#using-the-application)
   - [Registration](#1-registration)
   - [Login](#2-login)
+- [Testing](#testing)
+  - [Backend testing](#backend-testing)
+- [API Documentation](#api-documentation)
 
 ## First things to do
 
@@ -75,3 +79,16 @@ First you need to register by clicking on the user icon with the plus sign. Afte
 1. After you confirmed your email, you can log in by clicking on the padlock icon. You can only log in with the email you added to your test users at the Google Dev Console OAuth Screen, becasue of the calendar access!
 2. Google hasn’t verified this app: select continue
 3. Click on the checkbox, to give access to your Google calendar
+
+## Testing
+
+### Backend testing
+Go to the backend folder and run:
+```console
+npm run test
+```
+## API Documentation
+After starting the server locally, go to this endpoint to get the swagger documentation of this api:
+```console
+http://localhost:8080/docs
+```
