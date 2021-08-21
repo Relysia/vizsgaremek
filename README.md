@@ -1,5 +1,5 @@
 # Filmsquad
-In this application, film squad leaders can create teams for their crew. They can also manage their budget for cast members, rentings, traveling and food expenses. They can create new events which is automatically shared between all the crew members and will be added to their google calendar. Other squad members can see an overview of these information, if the team leader makes the team public.
+In this application, film squad leaders can create teams for their crew. They can also manage their budget for cast members, renting, traveling and food expenses. They can create new events which is automatically shared between all the crew members and will be added to their google calendar. Other squad members can see an overview of these information, if the team leader makes the team public.
 
 - [First things to do](#first-things-to-do)
   - [Installing dependencies](#1-installing-dependencies)
