@@ -83,7 +83,17 @@ First you need to register by clicking on the user icon with the plus sign. Afte
 ## Testing
 
 ### Backend testing
-Go to the backend folder and run:
+Go to the backend folder and create a .env.testing file with this content:
+```env
+MONGO_CONNECTION="YOUR MONGO CONNECTION STRING"
+TOKEN_SECRET="YOUR TOKEN SECRET"
+CLIENT_ID="YOUR GOOGLE API CLIENT ID"
+CLIENT_SECRET="YOUR GOOGLE API CLIENT SECRET"
+SENDGRID_EMAIL="SENDGRID API KEY"
+SENDGRID_API=SG.BADAPIKEY  #This is imortant!
+FRONTEND_HOST=http://localhost:3000
+```
+After that you can run this command:
 ```console
 npm run test
 ```
