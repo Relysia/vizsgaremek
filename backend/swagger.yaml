@@ -1,0 +1,975 @@
+openapi: 3.0.0
+info:
+  title: Filmsquad API
+  description: This api is capable of creating teams for film crews, manage the budget of the whole shooting and add upcomming events to all the team members google calendar
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development server address
+components:
+  securitySchemes:
+    JWTAuthToken:
+      type: apiKey
+      in: header
+      name: Authorization
+    PexelsApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+tags:
+  -
+    name: Authorization
+    description: Login, register and confirmation endpoints
+  -
+    name: Pexels
+    description: Pexels api requests
+  -
+    name: Team
+    description: Create, join and list all team
+  -
+    name: Budget
+    description: Create, read, update and delete budget items
+  -
+    name: Calendar
+    description: Add new calendar event and handle user calendar roles
+  -
+    name: Summary
+    description: Get every data realated to the current user
+paths:
+  /api/register:
+    post:
+      tags:
+        - Authorization
+      summary: Register a new user
+      description: Create a new user in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - code
+              type: object
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Creating user and sending email was successfull
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Confirmation link has been sent to your email "example@gmail.com"!
+        '400':
+          description: 400 error if google authentication fails
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Google Authentication error!
+        '403':
+          description: 403 error if user already registered with the given email
+          content:
+            application/json:
+              schema:
+                type: string
+                example: You already registered with this email!
+  /api/login:
+    post:
+      tags:
+        - Authorization
+      summary: Login the registered user
+      description: Create a new user in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - code
+              type: object
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Google Authorization was successfull
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "JWT-TOKEN-STRING"
+        '400':
+          description: 400 error if google authentication fails
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Google Authentication error!
+        '401':
+          description: 401 authentication error
+          content:
+            application/json:
+              schema:
+                example:
+                  - error: You need to confirm your email address! 
+                  - error: You need to sign up first!
+  /api/confirm:
+    post:
+      tags:
+        - Authorization
+      summary: Email confirmation endpoint
+      description: Makes user valid in database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - code
+                - email
+              type: object
+              properties:
+                code:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Code and email is valid
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Email successfully confirmed!
+        '400':
+          description: 400 error if code or email is not valid
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Invalid confirmation link!
+  /api/getroles:
+    post:
+      tags:
+        - Authorization
+      summary: Getting current user role
+      description: Returns true or false for leader role
+      security:
+        - JWTAuthToken: []
+      responses:
+        '200':
+          description: User role found in database
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  leader:
+                    type: boolean
+                  calendar_id:
+                    type: string
+  /api/role:
+    post:
+      tags:
+        - Authorization
+      summary: Change user role
+      description: Change user role the leader or member
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - role
+              type: object
+              properties:
+                role:
+                  type: string
+      responses:
+        '200':
+          description: Changing user role was successfull
+          content:
+            application/json:
+              schema:
+                type: string
+                example: JWT-TOKEN-STRING
+        '400':
+          description: 400 error changing user role
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Error changing user role!
+  /api/pexelsvideo:
+    post:
+      tags:
+        - Pexels
+      summary: Find one pexels video by ID
+      description: Returns a pexels video by ID
+      security:
+        - PexelsApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - videoId
+              type: object
+              properties:
+                videoId:
+                  type: string
+      responses:
+        '200':
+          description: Returns the url of the video
+          content:
+            application/json:
+              schema:
+                type: string
+                example: https://player.vimeo.com/external/342571552.hd.mp4?s=6aa6f164de3812abadff3dde86d19f7a074a8a66&profile_id=175&oauth2_token_id=57447761
+        '400':
+          description: 400 error getting video from pexels
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Error getting pexels video!
+  /api/pexelsphoto:
+    post:
+      tags:
+        - Pexels
+      summary: Find one pexels photo by ID
+      description: Returns a pexels photo by ID
+      security:
+        - PexelsApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - photoId
+              type: object
+              properties:
+                photoId:
+                  type: string
+      responses:
+        '200':
+          description: Returns a pexels photo object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    example: 2014422
+                  width:
+                    type: number
+                    example: 3024
+                  height:
+                    type: number
+                    example: 3024
+                  url:
+                    type: string
+                    example: https://www.pexels.com/photo/brown-rocks-during-golden-hour-2014422/
+                  photographer:
+                    type: string
+                    example: Joey Farina
+                  photographer_url:
+                    type: string
+                    example: https://www.pexels.com/@joey
+                  photographer_id:
+                    type: number
+                  avg_color:
+                    type: string
+                    example: "#978E82"
+                  scr:
+                    type: object
+                    properties:
+                      original:
+                        type: string
+                        example: https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg
+                      large:
+                        type: string
+                        example: https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=650&w=940
+                      medium:
+                        type: string
+                        example: https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=350
+                      small:
+                        type: string
+                        example: https://images.pexels.com/photos/2014422/pexels-photo-2014422.jpeg?auto=compress&cs=tinysrgb&h=130
+        '400':
+          description: 400 error getting photo from pexels
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Error getting pexels photo!
+  /api/team/getteam:
+    get:
+      tags:
+        - Team
+      summary: List all team
+      description: Returns an object of all available team
+      security:
+        - JWTAuthToken: []
+      responses:
+        '200':
+          description: Returns an object with all available team
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    calendar_id:
+                      type: string
+                    name:
+                      type: string
+                    picture:
+                      type: string
+                    public:
+                      type: boolean
+        '400':
+          description: 400 error if there is no available team to join
+          content:
+            application/json:
+              schema:
+                type: string
+                example: No team available to join!
+  /api/team/create:
+    post:
+      tags:
+        - Team
+      summary: Creating a new team
+      description: Creates a new team and google calendar
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - title
+                - joinPublic
+                - budgetPublic
+                - teamRole
+              type: object
+              properties:
+                title:
+                  type: string
+                joinPublic:
+                  type: boolean
+                budgetPublic:
+                  type: boolean
+                teamRole:
+                  type: string
+      responses:
+        '200':
+          description: Creates a team in database
+          content:
+            application/json:
+              schema:
+                type: string
+                example: New team is created!
+        '400':
+          description: 400 missing information error
+          content:
+            application/json:
+              schema:
+                example:
+                  - error: Title is required!
+                  - error: Team role is required!
+                  - error: Error creating team 
+  /api/team/userteam:
+    post:
+      tags:
+        - Team
+      summary: List current user team
+      description: Returns a team object for the current user
+      security:
+        - JWTAuthToken: []
+      responses:
+        '200':
+          description: User team object returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  leader:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      picture:
+                        type: string
+                      role:
+                        type: string
+                  members:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      picture:
+                        type: string
+                      role:
+                        type: string
+                      share:
+                        type: boolean
+                      join:
+                        type: boolean
+                  public:
+                    type: boolean
+        '400':
+          description: 400 error user team not found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Team not found!
+  /api/team/jointeam:
+    post:
+      tags:
+        - Team
+      summary: Join a team
+      description: Current user can join an existing team
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - calendar_id
+                - role
+              type: object
+              properties:
+                calendar_id:
+                  type: string
+                role:
+                  type: string
+      responses:
+        '200':
+          description: Successfully joined a team
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Successfully joined team!
+        '400':
+          description: 400 error team not found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Team not found!
+  /api/team/teamauth:
+    post:
+      tags:
+        - Team
+      summary: User team status
+      description: Checking if user has a team yet
+      security:
+        - JWTAuthToken: []
+      responses:
+        '200':
+          description: User has a team already
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Success!
+        '404':
+          description: 404 error, user don't have a team
+          content:
+            application/json:
+              schema:
+                example:
+                  - error: You need to create a team first!
+                  - error: You need to join a team first!
+  /api/budget/get:
+    post:
+      tags:
+        - Budget
+      summary: List the filtered budget
+      description: Returns an array of the filtered budget
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+              type: object
+              properties:
+                type:
+                  type: string
+      responses:
+        '200':
+          description: Filtered budget array
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  budget:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        budget_type:
+                          type: string
+                        budget_name:
+                          type: string
+                        budget_cost:
+                          type: number
+                  total:
+                    type: number
+  /api/budget/post:
+    post:
+      tags:
+        - Budget
+      summary: Post new budget item
+      description: Post new budget item to the database
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+                - first
+                - second
+                - third
+              type: object
+              properties:
+                type:
+                  type: string
+                first:
+                  type: string
+                second:
+                  type: string
+                third:
+                  type: number
+      responses:
+        '200':
+          description: Successfully added new item
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Successfully added new cast member!
+        '400':
+          description: 400 error missing required input fields
+          content:
+            application/json:
+              schema:
+                type: string
+                example: You need to fill out all input field!
+        '403':
+          description: 403 error, user has no team
+          content:
+            application/json:
+              schema:
+                type: string
+                example: You need to create a team first!
+  /api/budget/put:
+    post:
+      tags:
+        - Budget
+      summary: Update a budget item
+      description: Update an existing budget item in database
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+                - objectId
+                - first
+                - second
+                - third
+              type: object
+              properties:
+                type:
+                  type: string
+                objectId:
+                  type: string
+                first:
+                  type: string
+                second:
+                  type: string
+                third:
+                  type: string
+      responses:
+        '200':
+          description: Successfully updated budget item
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Successfully updated budget details!
+        '400':
+          description: 400 error team not found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Team not found!
+  /api/budget/delete:
+    post:
+      tags:
+        - Budget
+      summary: Delete a budget item
+      description: Delete an existing budget item from database
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - type
+                - objectId
+              type: object
+              properties:
+                type:
+                  type: string
+                objectId:
+                  type: string
+      responses:
+        '200':
+          description: Successfully removed budget item
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Successfully deleted cast member!
+  /api/budget/role:
+    post:
+      tags:
+        - Budget
+      summary: User team status
+      description: Checking if user has a team yet
+      security:
+        - JWTAuthToken: []
+      responses:
+        '200':
+          description: User has a team already
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Success!
+        '404':
+          description: 404 error, user don't have a team
+          content:
+            application/json:
+              schema:
+                example:
+                  - error: You need to create a team first!
+                  - error: You need to join a team first!
+  /api/calendar/newevent:
+    post:
+      tags:
+        - Calendar
+      summary: Add new calendar event
+      description: Adding a new event to every team member google calendar
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - title
+                - location
+                - description
+                - colorId
+                - startDate
+                - startTime
+                - endDate
+                - endTime
+              type: object
+              properties:
+                title:
+                  type: string
+                location:
+                  type: string
+                description:
+                  type: string
+                colorId:
+                  type: string
+                startDate:
+                  type: string
+                startTime:
+                  type: string
+                endDate:
+                  type: string
+                endTime:
+                  type: string
+      responses:
+        '200':
+          description: Successfully added new event
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Event has been recorded successfully!
+        '400':
+          description: 400 error, sending new event to google calendar
+          content:
+            application/json:
+              schema:
+                type: string
+                example: There was an error, sending your event!
+  /api/calendar/getupcomming:
+    get:
+      tags:
+        - Calendar
+      summary: List upcomming events
+      description: List all upcomming event from google calendar
+      security:
+        - JWTAuthToken: []
+      responses:
+        '200':
+          description: Calendar events object
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    summary:
+                      type: string
+                    start:
+                      type: object
+                      properties:
+                        dateTime:
+                          type: string
+                    end:
+                      type: object
+                      properties:
+                        dateTime:
+                          type: string
+                    htmlLink:
+                      type: string
+        '400':
+          description: 400 error, couldn't get calendar events from google
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Error getting calendar events!
+  /api/calendar/sharecalendar:
+    post:
+      tags:
+        - Calendar
+      summary: Share calendar
+      description: Team leader shares google calendar with members
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - email
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Google calendar shared with team member
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Successfully shared!
+        '400':
+          description: 400 error, couldn't share google calendar with user
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Error sharing calendar!
+  /api/calendar/addcalendar:
+    post:
+      tags:
+        - Calendar
+      summary: Add calendar to google
+      description: Team members can add team calendar to their google calendar
+      security:
+        - JWTAuthToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - email
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Successfully added google calendar
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  etag:
+                    type: string
+                  id:
+                    type: string
+                  summary:
+                    type: string
+                  description:
+                    type: string
+                  location:
+                    type: string
+                  colorId:
+                    type: string
+                  accessRole:
+                    type: string
+        '400':
+          description: 400 error, couldn't add google calendar
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Error adding calendar!
+  /api/calendar/calendarrole:
+    post:
+      tags:
+        - Calendar
+      summary: User calendar roles
+      description: Getting current user calendar roles
+      security:
+        - JWTAuthToken: []
+      responses:
+        '200':
+          description: User calendar roles object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  share:
+                    type: boolean
+                  join:
+                    type: boolean
+  /api/summary:
+    post:
+      tags:
+        - Summary
+      summary: Get every information for current user
+      description: Get team details, budget information and upcomming events for the current user
+      security:
+        - JWTAuthToken: []
+      responses:
+        '200':
+          description: Summary object with every information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  team:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      leader:
+                        type: object
+                        properties:
+                          name: 
+                            type: string
+                          picture: 
+                            type: string
+                          role: 
+                            type: string
+                      members:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            picture:
+                              type: string
+                            role:
+                              type: string
+                  budget:
+                    type: object
+                    properties:
+                      total:
+                        type: number
+                      budget:
+                        type: object
+                        properties:
+                          cast_total:
+                            type: number
+                          rent_total:
+                            type: number
+                          travel_total:
+                            type: number
+                          food_total:
+                            type: number
+                  calendar:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        summary:
+                          type: string
+                        start:
+                          type: object
+                          properties:
+                            dateTime:
+                              type: string
+                        end:
+                          type: object
+                          properties:
+                            dateTime:
+                              type: string
+                        htmlLink:
+                          type: string
+        '400':
+          description: 400 error, couldn't share google calendar with user
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Error sharing calendar!
