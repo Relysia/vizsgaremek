@@ -11,6 +11,7 @@ In this application, film squad leaders can create teams for their crew. They ca
 - [Using the application](#using-the-application)
   - [Registration](#1-registration)
   - [Login](#2-login)
+- [Docker](#docker)
 - [Testing](#testing)
   - [Backend testing](#backend-testing)
 - [API Documentation](#api-documentation)
@@ -53,13 +54,13 @@ CLIENT_SECRET="YOUR GOOGLE API CLIENT SECRET"
 SENDGRID_EMAIL="SENDGRID EMAIL ADDRESS"
 SENDGRID_API="SENDGRID API KEY"
 PEXEL_API_KEY="PEXELS API KEY"
-FRONTEND_HOST=http://localhost:3000 #For testing docker compose use "http://localhost"
+FRONTEND_HOST=http://localhost:3000
 ```
 
 ### 5. Create a .env file in the frontend folder with the following content:
 ```env
 REACT_APP_BACKEND_HOST=http://localhost:8080
-REACT_APP_FRONTEND_HOST=http%3A//localhost:3000 #For testing docker compose use "http%3A//localhost"
+REACT_APP_FRONTEND_HOST=http%3A//localhost:3000
 REACT_APP_CLIENT_ID="YOUR GOOGLE API CLIENT ID"
 ```
 
@@ -79,6 +80,22 @@ First you need to register by clicking on the user icon with the plus sign. Afte
 1. After you confirmed your email, you can log in by clicking on the padlock icon. You can only log in with the email you added to your test users at the Google Dev Console OAuth Screen, becasue of the calendar access!
 2. Google hasn’t verified this app: select continue
 3. Click on the checkbox, to give access to your Google calendar
+
+## Docker
+
+1. Edit the following line in the frontend folder .env file:
+```env
+REACT_APP_FRONTEND_HOST=http%3A//localhost
+```
+2. Edit the following line in the backend folder .env file:
+```env
+FRONTEND_HOST=http://localhost
+```
+3. Go to the root folder and run:
+```console
+docker-compose up -d
+```
+The project will run on "http://localhost/"
 
 ## Testing
 
